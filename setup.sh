@@ -10,7 +10,7 @@ fi
 # download transformers repo
 git clone https://github.com/m0n0l0c0/transformers
 cd transformers
-pip install .
+sudo pip install .
 cd -
 
 mkdir -p data/race
@@ -21,7 +21,7 @@ cd -
 
 # pre-installed tensorflow-gpu and cuda
 if [[ $dockerize -eq 0 ]]; then
-  pip install requirements.txt
+  sudo pip install requirements.txt
 else
   echo "Asked for docker install, no packages to install"
 fi
