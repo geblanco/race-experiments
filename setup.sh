@@ -9,6 +9,9 @@ fi
 
 # download transformers repo
 git clone https://github.com/m0n0l0c0/transformers
+cd transformers
+pip install .
+cd -
 
 mkdir -p data/race
 wget -q -O data/race/race.tar.gz http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz
