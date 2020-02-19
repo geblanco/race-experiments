@@ -1,5 +1,5 @@
 export RACE_DIR=data/RACE
-python ./examples/run_multiple_choice.py \
+python ./transformers/examples/run_multiple_choice.py \
   --model_type albert \
   --task_name race \
   --model_name_or_path albert-large-v2 \
@@ -18,3 +18,4 @@ python ./examples/run_multiple_choice.py \
   --per_gpu_eval_batch_size=8 \
   --gradient_accumulation_steps 2 \
   --warmup_steps 1000
+
