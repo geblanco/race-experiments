@@ -16,9 +16,9 @@ cd transformers
 sudo pip install .
 cd -
 
-mkdir -p data/race
-wget -q -O data/race/race.tar.gz http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz
-cd data/race
+mkdir -p data
+wget -q -O data/race.tar.gz http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz
+cd data/
 echo "Uncompressing race..."
 tar xfz race.tar.gz
 cd -
