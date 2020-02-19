@@ -1,5 +1,5 @@
 export RACE_DIR=data/RACE
-python ./transformers/examples/run_multiple_choice.py \
+python3 ./transformers/examples/run_multiple_choice.py \
   --model_type albert \
   --task_name race \
   --model_name_or_path albert-large-v2 \
