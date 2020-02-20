@@ -16,6 +16,13 @@ cd transformers
 sudo pip install .
 cd -
 
+# install apex manually (py3 error...)
+git clone https://www.github.com/nvidia/apex
+cd apex
+sudo pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+cd -
+
+
 mkdir -p data
 wget -q -O data/race.tar.gz http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz
 cd data/
