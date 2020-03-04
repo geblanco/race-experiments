@@ -71,7 +71,7 @@ def parse_args():
 
 answer_indices_to_letters = ['A', 'B', 'C', 'D']
 
-def Example(object):
+class Example(object):
   def __init__(self, id, ee_example):
     self.id = id
     self.article = ee_example['doc']['$t']
@@ -86,29 +86,29 @@ def Example(object):
   def _process_answers(self, questions):
     # get the index of the answer with correct=True
     answers = []
-    for question in question:
+    for question in questions:
       for index, answer in enumerate(question['answer']):
-        if answer['correct']:
+        if answer.get('correct', False):
           answers.append(answer_indices_to_letters[index])
     return answers
 
   def _process_options(self, questions):
     options = []
     for question in questions:
-      options.append([q['$t'] for q in question['answer']]):
+      options.append([q['$t'] for q in question['answer']])
     return options
 
   def to_json(self):
     return self.__dict__
 
-def process_example(example):
-
-
 def main():
   data = json.load(open(flags.input))
-
+  data = data['test-set']['topic']['reading-test']
+  examples = [Example(datapoint['r_id'], datapoint).to_json()
+                for datapoint in data]
+  dataset = dict(version=1.0, data=examples)
+  print(json.dumps(obj=dataset, ensure_ascii=False))
 
 if __name__ == '__main__':
   flags = parse_args()
   main()
-
