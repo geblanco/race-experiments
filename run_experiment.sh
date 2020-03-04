@@ -2,6 +2,9 @@ export RACE_DIR=data/RACE
 export BERT_MODEL=multi_cased_L-12_H-768_A-12
 export BERT_MULTI_DIR=models/$BERT_MODEL
 
+echo "###### Starting experiments $(date)"
+total_start_time=$(date -u +%s)
+
 python3 ./transformers/examples/run_multiple_choice.py \
   --model_type albert \
   --task_name race \
@@ -23,3 +26,6 @@ python3 ./transformers/examples/run_multiple_choice.py \
   --gradient_accumulation_steps 64 \
   --warmup_steps 1000
 
+total_end_time=$(date -u +%s)
+total_elapsed=$(python3 -c "print('{:.2f}'.format(($total_end_time - $total_start_time)/60.0 ))")
+echo "###### End of experiments $(date) ($total_elapsed) minutes"
