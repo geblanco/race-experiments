@@ -46,8 +46,7 @@ if [[ ! -z "$WARMUP_PROPORTION" ]]; then
   args+="--warmup_proportion $WARMUP_PROPORTION "
 fi
 
-echo ${args[@]}
-# python3 ${args[@]}
+python3 ${args[@]}
 
 total_end_time=$(date -u +%s)
 total_elapsed=$(python3 -c "print('{:.2f}'.format(($total_end_time - $total_start_time)/60.0 ))")
