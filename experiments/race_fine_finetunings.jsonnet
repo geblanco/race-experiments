@@ -1,3 +1,5 @@
+local utils = import 'utils.libsonnet';
+
 local common = {
   "task_name": "race",
   "data_dir": "data/RACE",
@@ -26,14 +28,10 @@ local multiBertCommon = {
   "learning_rate": 1e-5,
 };
 
-local bashExport(var, val) = {
-  ret: 'export ' + std.asciiUpper(var) + '=' + val
-};
-
 local variables = {
-  globalCommon: std.join('\n', [bashExport(var, common[var]).ret for var in std.objectFields(common)]),
-  betCommon: std.join('\n', [bashExport(var, bertCommon[var]).ret for var in std.objectFields(bertCommon)]),
-  multiBertCommon: std.join('\n', [bashExport(var, multiBertCommon[var]).ret for var in std.objectFields(multiBertCommon)]),
+  globalCommon: utils.fieldsToBash(common),
+  betCommon: utils.fieldsToBash(bertCommon),
+  multiBertCommon: utils.fieldsToBash(multiBertCommon),
 };
 
 
