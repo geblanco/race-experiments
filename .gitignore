@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Jsonnet generated experiment files
-experiments/*.sh
+experiments/

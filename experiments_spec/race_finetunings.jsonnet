@@ -17,7 +17,7 @@ local common = {
 local bertCommon = {
   "model_type": "bert",
   "model_name_or_path": "bert-base-uncased",
-  "output_dir": "data/bert-base-uncased"
+  "output_dir": "data/bert-base-uncased",
   "learning_rate": 5e-5,
 };
 
@@ -30,7 +30,7 @@ local multiBertCommon = {
 
 local variables = {
   globalCommon: utils.fieldsToBash(common),
-  betCommon: utils.fieldsToBash(bertCommon),
+  bertCommon: utils.fieldsToBash(bertCommon),
   multiBertCommon: utils.fieldsToBash(multiBertCommon),
 };
 
