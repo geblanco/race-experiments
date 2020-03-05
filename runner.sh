@@ -22,7 +22,6 @@ args+="--data_dir $DATA_DIR "
 args+="--data_id $DATA_ID "
 args+="--output_dir $OUTPUT_DIR "
 args+="--overwrite_output "
-args+="--do_eval "
 args+="--learning_rate 1e-5 "
 args+="--num_train_epochs 3 "
 args+="--max_seq_length 256 "
@@ -32,6 +31,14 @@ args+="--gradient_accumulation_steps 64 "
 
 if [[ ! -z "$DO_TRAIN" ]]; then
   args+="--do_train "
+fi
+
+if [[ ! -z "$DO_EVAL" ]]; then
+  args+="--do_eval "
+fi
+
+if [[ ! -z "$DO_TEST" ]]; then
+  args+="--do_test "
 fi
 
 if [[ ! -z "$FP16" ]]; then
