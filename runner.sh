@@ -46,6 +46,10 @@ if [[ ! -z "$WARMUP_PROPORTION" ]]; then
   args+="--warmup_proportion $WARMUP_PROPORTION "
 fi
 
+if [[ ! -z "$OVERWRITE_CACHE" ]]; then
+  args+="--overwrite_cache "
+fi
+
 python3 ${args[@]}
 
 total_end_time=$(date -u +%s)

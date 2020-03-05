@@ -4,7 +4,8 @@ local common = {
   "fp16": true,
   "fp16_opt_level": '"O2"',
   "max_seq_length": 384,
-  "per_gpu_eval_batch_size": 4
+  "per_gpu_eval_batch_size": 4,
+  "overwrite_cache": true,
 };
 
 local bertCommon = {
