@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Jsonnet generated experiment files
+experiments/*.sh
