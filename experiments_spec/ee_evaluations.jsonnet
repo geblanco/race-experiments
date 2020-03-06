@@ -8,6 +8,7 @@ local common = {
   "max_seq_length": 384,
   "overwrite_cache": true,
   "do_test": true,
+  "per_gpu_eval_batch_size": 32,
   "model_type": "bert",
 };
 

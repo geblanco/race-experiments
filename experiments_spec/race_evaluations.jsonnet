@@ -7,6 +7,7 @@ local common = {
   "fp16_opt_level": '"O2"',
   "max_seq_length": 384,
   "overwrite_cache": true,
+  "per_gpu_eval_batch_size": 32,
   "do_test": true,
 };
 
