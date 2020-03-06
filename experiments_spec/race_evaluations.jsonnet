@@ -56,4 +56,10 @@ local variables = {
     %(vars)s
     export DATA_ID="test/middle"
   ||| % { common: variables.globalCommon, vars: variables.multiBertCommon },
+  'race-eval.filelist': |||
+    bert-high.sh
+    bert-middle.sh
+    multi-bert-high.sh
+    multi-bert-middle.sh
+  |||,
 }

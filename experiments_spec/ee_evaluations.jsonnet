@@ -38,7 +38,7 @@ local composeDataId(testName, modelName) = {
   "DATA_ID": std.strReplace(std.strReplace(testName, modelName, 'rc-test'), '.sh', '.json')
 };
 
-{
+local files = {
   [testName]: |||
     #!/bin/bash
     %(common)s
@@ -49,4 +49,17 @@ local composeDataId(testName, modelName) = {
     model: utils.fieldsToBash(models[std.split(testName, '-')[0]]),
     dataId: utils.fieldsToBash(composeDataId(testName, std.split(testName, '-')[0])),
   } for testName in eeCommons.modelsTests
+};
+
+local filelist = {
+  'ee-eval.filelist': std.join('\n', eeCommons.modelsTests)
+};
+
+# object comprehension can only have one item, no filelist ....
+local allFiles = files + filelist;
+
+{
+  [fileName]: |||
+    %s
+  ||| % allFiles[fileName] for fileName in std.objectFields(allFiles)
 }

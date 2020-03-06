@@ -46,4 +46,8 @@ local variables = {
     %(common)s
     %(vars)s
   ||| % { common: variables.globalCommon, vars: variables.multiBertCommon },
+  'race-finetune.filelist': |||
+    bert.sh
+    multi-bert.sh
+  |||,
 }
