@@ -130,3 +130,5 @@ dmypy.json
 
 # Jsonnet generated experiment files
 experiments/
+# Results
+eval_logs/
