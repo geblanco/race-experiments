@@ -3,16 +3,7 @@ implement:
    accuracy
    c@1: https://www.researchgate.net/publication/220873174_A_Simple_Measure_to_Assess_Non-response
 """
-
-import argparse
 import json
-
-flags = None
-
-# ToDo
-def parse_flags():
-  parser = argparse.ArgumentParser()
-  # parser.add_argument()
 
 def accuracy(gold, answers):
   correct = 0
@@ -32,9 +23,3 @@ def c_at_1(gold, answers, no_answer):
       unanswered += 1
   return (1 / total) * (correct + (correct / total) * unanswered)
 
-def main():
-  pass
-
-if __name__ == '__main__':
-  flags = parse_flags()
-  main()
