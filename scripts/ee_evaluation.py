@@ -35,28 +35,11 @@ def gather_answers(dataset):
     id_ans[test['id']] = [label_to_id(ans) for ans in test['answers']]
   return id_ans
 
-def evaluate(gold, flat_gold, predictions, flat_preds):
-  no_answer = -1
-  passed_tests = 0
-  total_tests = len(gold.keys())
-  eval_results = {}
-  eval_results['c@1'] = c_at_1(flat_gold, flat_preds, no_answer)
-  for test_key in gold.keys():
-    key = 'test_%s_c@1' % test_key
-    eval_results[key] = c_at_1(gold[test_key], predictions[test_key], no_answer)
-    if eval_results[key] >= 0.5:
-      passed_tests += 1
-  eval_results['passed_tests'] = passed_tests
-  eval_results['total_tests'] = total_tests
-  return eval_results
-
 def main():
   dataset = json.load(open(flags.data))['data']
   gold= gather_answers(dataset)
-  flat_gold = flatten(gold.values())
   predictions = json.load(open(flags.predictions))
-  flat_preds = flatten(predictions.values())
-  eval_results = evaluate(gold, flat_gold, predictions, flat_preds)
+  eval_results = c_at_1(gold, flat_gold, predictions, flat_preds)
   results = json.dumps(eval_results) + '\n'
   if flags.output is None:
     print(results)

@@ -1,14 +1,15 @@
 import sys
 import json
 import argparse
-from evaluation import c_at_1
+from evaluation import c_at_1_by_test
 
 flags = None
 no_answer = -1
 
 def parse_flags():
   parser = argparse.ArgumentParser()
-  parser.add_argument('nbest_predictions', help='All predictions from model')
+  parser.add_argument('nbest_predictions', nargs='*',
+      help='All predictions from model. Can be multiple files')
 
   if len(sys.argv) == 1:
     parser.print_help()
@@ -59,14 +60,16 @@ def sweep(answers, increments):
       ans.set_threshold(threshold)
       gold_and_labels.extend(ans.get_pred_tuple())
     gold, labels = list(zip(*gold_and_labels))
-    scores.append(c_at_1(gold, labels, no_answer))
+    scores.append(c_at_1_by_test(gold, labels, no_answer))
   best_thresh_idx = argmax(scores)
   return best_thresh_idx, scores
 
 def main():
-  predictions = json.load(open(flags.nbest_predictions, 'r'))
-  prediction_answers = [Answer(p['probs'], p['label'], p['pred_label']) 
-                          for p in predictions]
+  prediction_answers = []
+  for predictions_file in flags.nbest_predictions:
+    predictions = json.load(open(predictions_file, 'r'))
+    prediction_answers.extend([Answer(p['probs'], p['label'], p['pred_label']) 
+                          for p in predictions])
   increments = unique([0] + sorted([p.get_max_prob() for p in prediction_answers]))
   best_thresh_idx, scores = sweep(prediction_answers, increments)
   print('Best score: {}, threshold {}'.format(scores[best_thresh_idx],

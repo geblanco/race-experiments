@@ -5,6 +5,9 @@ implement:
 """
 import json
 
+def flatten(lists):
+  return [item for _list in lists for item in _list]
+
 def accuracy(gold, answers):
   correct = 0
   for gold_ans, ans in zip(gold, answers):
@@ -13,6 +16,22 @@ def accuracy(gold, answers):
   return correct / len(gold)
 
 def c_at_1(gold, answers, no_answer):
+  passed_tests = 0
+  total_tests = len(gold.keys())
+  flat_gold = flatten(gold.values())
+  flat_ans = flatten(answers.values())
+  eval_results = {}
+  eval_results['c@1'] = c_at_1(flat_gold, flat_ans, no_answer)
+  for test_key in gold.keys():
+    key = 'test_%s_c@1' % test_key
+    eval_results[key] = c_at_1_by_test(gold[test_key], answers[test_key], no_answer)
+    if eval_results[key] >= 0.5:
+      passed_tests += 1
+  eval_results['passed_tests'] = passed_tests
+  eval_results['total_tests'] = total_tests
+  return eval_results
+
+def c_at_1_by_test(gold, answers, no_answer):
   correct = 0
   unanswered = 0
   total = len(gold)
