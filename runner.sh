@@ -22,7 +22,7 @@ for line in $(sed -n 's/^export \(.*\)=\([^ ]*\)/\1=\2/p' $file); do
   fi
 done
 
-echo "python3 ${args[@]}"
+python3 ${args[@]}
 
 total_end_time=$(date -u +%s)
 total_elapsed=$(python3 -c "print('{:.2f}'.format(($total_end_time - $total_start_time)/60.0 ))")
