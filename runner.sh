@@ -11,8 +11,7 @@ echo "###### Starting experiments $(date)"
 total_start_time=$(date -u +%s)
 
 args="./transformers/examples/run_multiple_choice.py "
-for line in $(sed -n 's/export \(.*\)=\(.*\)/\1=\2/p' $file); do 
-  echo "Got $line"
+for line in $(sed -n 's/^export \(.*\)=\([^ ]*\)/\1=\2/p' $file); do 
   # <key>=<value>
   key=${line%=*}
   value=${line#*=}
@@ -23,7 +22,7 @@ for line in $(sed -n 's/export \(.*\)=\(.*\)/\1=\2/p' $file); do
   fi
 done
 
-python3 ${args[@]}
+echo "python3 ${args[@]}"
 
 total_end_time=$(date -u +%s)
 total_elapsed=$(python3 -c "print('{:.2f}'.format(($total_end_time - $total_start_time)/60.0 ))")
