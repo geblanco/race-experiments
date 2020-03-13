@@ -15,6 +15,8 @@ def parse_flags():
   parser = argparse.ArgumentParser()
   parser.add_argument('data', help='Dataset to evaluate against')
   parser.add_argument('predictions', help='Predictions from model to evaluate')
+  parser.add_argument('--output', '-o', 
+      help='Output for the predictions, default is stdout')
 
   if len(sys.argv) == 1:
     parser.print_help()
@@ -55,7 +57,12 @@ def main():
   predictions = json.load(open(flags.predictions))
   flat_preds = flatten(predictions.values())
   eval_results = evaluate(gold, flat_gold, predictions, flat_preds)
-  print(json.dumps(eval_results))
+  results = json.dumps(eval_results) + '\n'
+  if flags.output is None:
+    print(results)
+  else:
+    with open(flags.output, 'w') as f:
+      f.write(results)
 
 if __name__ == '__main__':
   flags = parse_flags()
