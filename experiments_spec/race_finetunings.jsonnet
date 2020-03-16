@@ -10,6 +10,7 @@ local common = {
   do_eval: true,
   warmup_proportion: 0.1,
   num_train_epochs: 3,
+  loss_scale: 128,
   per_gpu_train_batch_size: 4,
   per_gpu_eval_batch_size: 32,
   gradient_accumulation_steps: 8,
