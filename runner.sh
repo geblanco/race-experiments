@@ -44,7 +44,7 @@ total_start_time=$(date -u +%s)
 
 experiments=($@)
 for exp in ${experiments[@]}; do
-  model_dir=$(sed -n 's/export OUTPUT_DIR=\(.*\)/\1/p' experiments/$exp);
+  model_dir=$(sed -n 's/export OUTPUT_DIR=\(.*\)/\1/p' experiments/$exp | tr -d \'\");
   exp_name=${exp%.*}
   echo "*********** $exp *************";
   run_experiment experiments/$exp
