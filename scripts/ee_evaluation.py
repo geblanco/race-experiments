@@ -8,13 +8,18 @@ import argparse
 import json
 import sys
 from evaluation import c_at_1
+from threshold import apply_threshold
+from utils import flatten, parse_predictions_file, gather_labels
 
 flags = None
+no_answer = -1
 
 def parse_flags():
   parser = argparse.ArgumentParser()
   parser.add_argument('data', help='Dataset to evaluate against')
   parser.add_argument('predictions', help='Predictions from model to evaluate')
+  parser.add_argument('--threshold', default=0.0,
+    help='Threshold above which to give an empty answer')
   parser.add_argument('--output', '-o', 
       help='Output for the predictions, default is stdout')
 
@@ -23,23 +28,13 @@ def parse_flags():
     sys.exit(1)
   return parser.parse_args()
 
-def flatten(lists):
-  return [item for _list in lists for item in _list]
-
-def label_to_id(label):
-  return ord(label.upper()) - ord('A')
-
-def gather_answers(dataset):
-  id_ans = {}
-  for test in dataset:
-    id_ans[test['id']] = [label_to_id(ans) for ans in test['answers']]
-  return id_ans
-
 def main():
   dataset = json.load(open(flags.data))['data']
-  gold= gather_answers(dataset)
-  predictions = json.load(open(flags.predictions))
-  eval_results = c_at_1(gold, flat_gold, predictions, flat_preds)
+  gold = gather_labels(dataset)
+  answers = parse_predictions_file(flags.predictions)
+  apply_threshold(answers , flags.threshold)
+  answers = gather_labels(answers)
+  eval_results = c_at_1(gold, answers, no_answer)
   results = json.dumps(eval_results) + '\n'
   if flags.output is None:
     print(results)

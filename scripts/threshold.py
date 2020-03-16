@@ -2,6 +2,7 @@ import sys
 import json
 import argparse
 from evaluation import c_at_1_by_test
+from utils import argmax, unique, parse_predictions_file
 
 flags = None
 no_answer = -1
@@ -16,42 +17,6 @@ def parse_flags():
     sys.exit(1)
   return parser.parse_args()
 
-def argmax(values):
-  max_val, max_idx = values[0], 0
-  for i in range(len(values)):
-    if values[i] > max_val:
-      max_val = values[i]
-      max_idx = i
-  return max_idx
-
-def unique(values):
-  ret = {}
-  for value in values:
-    ret[value] = 1
-  return list(ret.keys())
-
-class Answer(object):
-  def __init__(self, probs, label, pred_label):
-    self.probs = probs
-    self.label = label
-    self.pred_label = pred_label
-    self.threshold = 0.0
-
-  def set_threshold(self, threshold):
-    self.threshold = threshold
-
-  def get_answer(self):
-    ans = -1
-    if max(self.probs) > self.threshold:
-      ans = argmax(self.probs)
-    return ans
-
-  def get_pred_tuple(self):
-    return [(self.label, self.get_answer())]
-
-  def get_max_prob(self):
-    return max(self.probs)
-
 def sweep(answers, increments):
   scores = []
   for threshold in increments:
@@ -64,12 +29,14 @@ def sweep(answers, increments):
   best_thresh_idx = argmax(scores)
   return best_thresh_idx, scores
 
+def apply_threshold(answers, threshold):
+  for ans in answers:
+    ans.set_threshold(threshold)
+
 def main():
   prediction_answers = []
   for predictions_file in flags.nbest_predictions:
-    predictions = json.load(open(predictions_file, 'r'))
-    prediction_answers.extend([Answer(p['probs'], p['label'], p['pred_label']) 
-                          for p in predictions])
+    prediction_answers.extend(parse_predictions_file(predictions_file))
   increments = unique([0] + sorted([p.get_max_prob() for p in prediction_answers]))
   best_thresh_idx, scores = sweep(prediction_answers, increments)
   print('Best score: {}, threshold {}'.format(scores[best_thresh_idx],
