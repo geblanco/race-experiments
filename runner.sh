@@ -22,7 +22,7 @@ save_experiment_data() {
 run_experiment() {
   local file=$1; shift
   args="./transformers/examples/run_multiple_choice.py "
-  for line in $(sed -n 's/^export \(.*\)=\([^ ]*\)/\1=\2/p' $file); do 
+  for line in $(sed -n 's/^export \(.*\)=\([^ ]*\)/\1=\2/p' $file | tr -d \'\"); do 
     # <key>=<value>
     key=${line%=*}
     value=${line#*=}
@@ -44,7 +44,7 @@ total_start_time=$(date -u +%s)
 
 experiments=($@)
 for exp in ${experiments[@]}; do
-  model_dir=$(sed -n 's/export OUTPUT_DIR=\(.*\)/\1/p' experiments/$exp | tr -d \'\");
+  model_dir=$(sed -n 's/export OUTPUT_DIR=\(.*\)/\1/p' experiments/$exp);
   exp_name=${exp%.*}
   echo "*********** $exp *************";
   run_experiment experiments/$exp
