@@ -2,9 +2,9 @@
 
 result_files=(
   "is_test_false_eval_results.txt"
-  "is_test_false_eval_preds.json"
+  "is_test_false_eval_nbest_predictions.json"
   "is_test_true_eval_results.txt"
-  "is_test_true_eval_preds.json"
+  "is_test_true_eval_nbest_predictions.json"
 )
 
 save_experiment_data() {
