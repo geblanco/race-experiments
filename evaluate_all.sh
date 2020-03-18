@@ -1,6 +1,7 @@
 #!/bin/bash
 
-languages=("english" "spanish")
+languages=("french" "german" "italian" "russian")
+# languages=("english" "spanish")
 years=(2013 2014 2015)
 models=("bert" "multibert")
 
