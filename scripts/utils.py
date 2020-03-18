@@ -24,6 +24,12 @@ def flatten_dict(lists, keys=None):
       flat_array.extend(lists[key])
   return flat_array
 
+def sort_dict(_dict):
+  ret = {}
+  for key in sorted(_dict.keys()):
+    ret[key] = _dict[key]
+  return ret
+
 def label_to_id(label):
   return ord(label.upper()) - ord('A')
 

@@ -1,27 +1,27 @@
 local utils = import 'utils.libsonnet';
 
 local common = {
-  "task_name": "race",
-  "data_dir": "data/RACE",
-  "fp16": true,
-  "fp16_opt_level": '"O2"',
-  "max_seq_length": 384,
-  "overwrite_cache": true,
-  "per_gpu_eval_batch_size": 32,
-  "do_test": true,
+  task_name: 'race',
+  data_dir: 'data/RACE',
+  fp16: true,
+  fp16_opt_level: '"O2"',
+  max_seq_length: 384,
+  overwrite_cache: true,
+  per_gpu_eval_batch_size: 32,
+  do_test: true,
 };
 
-# when not training, model_name_or_path must match the model in output_dir
+// when not training, model_name_or_path must match the model in output_dir
 local bertCommon = {
-  "model_type": "bert",
-  "output_dir": "data/bert-base-uncased",
-  "model_name_or_path": self.output_dir,
+  model_type: 'bert',
+  output_dir: 'data/bert-base-uncased',
+  model_name_or_path: self.output_dir,
 };
 
 local multiBertCommon = {
-  "model_type": "bert",
-  "output_dir": "data/bert-base-multilingual-cased",
-  "model_name_or_path": self.output_dir,
+  model_type: 'bert',
+  output_dir: 'data/bert-base-multilingual-cased',
+  model_name_or_path: self.output_dir,
 };
 
 
@@ -44,13 +44,13 @@ local variables = {
     %(vars)s
     export DATA_ID="test/middle"
   ||| % { common: variables.globalCommon, vars: variables.bertCommon },
-  'multi-bert-high.sh': |||
+  'multibert-high.sh': |||
     #!/bin/bash
     %(common)s
     %(vars)s
     export DATA_ID="test/high"
   ||| % { common: variables.globalCommon, vars: variables.multiBertCommon },
-  'multi-bert-middle.sh': |||
+  'multibert-middle.sh': |||
     #!/bin/bash
     %(common)s
     %(vars)s
@@ -59,7 +59,7 @@ local variables = {
   'race-eval.filelist': |||
     bert-high.sh
     bert-middle.sh
-    multi-bert-high.sh
-    multi-bert-middle.sh
+    multibert-high.sh
+    multibert-middle.sh
   |||,
 }
