@@ -15,8 +15,14 @@ def unique(values):
     ret[value] = 1
   return list(ret.keys())
 
-def flatten(lists):
-  return [item for _list in lists for item in _list]
+def flatten_dict(lists, keys=None):
+  flat_array = []
+  if keys is None:
+    flat_array = [item for _list in lists for item in lists[_list]]
+  else:
+    for key in keys:
+      flat_array.extend(lists[key])
+  return flat_array
 
 def label_to_id(label):
   return ord(label.upper()) - ord('A')

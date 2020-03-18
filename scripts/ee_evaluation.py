@@ -9,7 +9,7 @@ import json
 import sys
 from evaluation import c_at_1
 from threshold import apply_threshold
-from utils import flatten, parse_predictions_file, gather_labels
+from utils import parse_predictions_file, gather_labels
 
 flags = None
 no_answer = -1
@@ -18,7 +18,7 @@ def parse_flags():
   parser = argparse.ArgumentParser()
   parser.add_argument('data', help='Dataset to evaluate against')
   parser.add_argument('predictions', help='Predictions from model to evaluate')
-  parser.add_argument('--threshold', default=0.0,
+  parser.add_argument('--threshold', '-t', default=0.0, type=float,
     help='Threshold above which to give an empty answer')
   parser.add_argument('--output', '-o', 
       help='Output for the predictions, default is stdout')

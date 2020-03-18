@@ -4,7 +4,7 @@ implement:
    c@1: https://www.researchgate.net/publication/220873174_A_Simple_Measure_to_Assess_Non-response
 """
 import json
-from utils import flatten
+from utils import flatten_dict
 
 def accuracy(gold, answers):
   correct = 0
@@ -16,8 +16,8 @@ def accuracy(gold, answers):
 def c_at_1(gold, answers, no_answer):
   passed_tests = 0
   total_tests = len(gold.keys())
-  flat_gold = flatten(gold.values())
-  flat_ans = flatten(answers.values())
+  flat_gold = flatten_dict(gold)
+  flat_ans = flatten_dict(answers, keys=gold.keys())
   eval_results = {}
   eval_results['c@1'] = c_at_1_by_test(flat_gold, flat_ans, no_answer)
   for test_key in gold.keys():
