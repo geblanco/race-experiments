@@ -1,6 +1,6 @@
 #!/bin/bash
 
-languages=("french" "german" "italian" "russian")
+languages=("english" "spanish" "italian" "french" "russian" "german")
 # languages=("english" "spanish")
 years=(2013 2014 2015)
 models=("bert" "multibert")
@@ -13,6 +13,8 @@ ee_dataset_dir="../../../datasets/EntranceExams"
 preds_suffix="is_test_true_eval_nbest_predictions.json"
 scores_suffix="is_test_true_eval_scores.json"
 table_suffix="is_test_true_eval_table.txt"
+
+exceptions=("german-2013" "german-2014")
 
 declare -A thresholds
 
@@ -37,6 +39,9 @@ join(){
     local args="--join "
     local prefixes="--prefix "
     for year in ${years[@]}; do
+      if [[ " ${exceptions[@]} " =~ " ${lang}-${year} " ]]; then
+        continue
+      fi
       dataset="${prefix}-${lang}-${year}${suffix}"
       args+="$dataset "
       prefixes+="${lang}-${year} "
@@ -54,9 +59,9 @@ evaluate() {
   local dataset="${ee_dataset_dir}/rc-test-${lang}-${year}.json"
   local predictions="results/${model}-${lang}-${year}_${preds_suffix}"
   local results="results/${model}-${lang}-${year}_${scores_suffix}"
-  local table="results/bert-spanish-${year}_${table_suffix}"
+  local table="results/${model}-${lang}-${year}_${table_suffix}"
   python $eval_script --global_only --passed_tests --accuracy $dataset $predictions -t $threshold > $results
-  $json2table $results -t | tee $table  | awk '{print "     " $0}' | head -n -1
+  $json2table $results -t | tee $table  | awk '{print "   " $0}' | head -n -1 | tail -n 2
 }
 
 join "${ee_dataset_dir}/rc-test" ".json"
@@ -70,7 +75,10 @@ for lang in ${languages[@]}; do
   for model in ${models[@]}; do
     echo " ${model}"
     for year in ${years[@]}; do
-      echo "   ${year}"
+      if [[ " ${exceptions[@]} " =~ " ${lang}-${year} " ]]; then
+        continue
+      fi
+      echo "  ${year}"
       evaluate $lang $model $year
     done
     echo ""

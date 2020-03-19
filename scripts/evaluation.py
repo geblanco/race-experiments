@@ -18,7 +18,7 @@ def c_at_1_by_test(gold, answers, no_answer):
       unanswered += 1
   return (1 / total) * (correct + (correct / total) * unanswered)
 
-def c_at_1(gold, answers, no_answer, global_only=False, passed_tests=False):
+def c_at_1(gold, answers, no_answer, global_only=False, include_tests=False):
   passed_tests = 0
   total_tests = len(gold.keys())
   flat_gold = flatten_dict(gold)
@@ -34,7 +34,7 @@ def c_at_1(gold, answers, no_answer, global_only=False, passed_tests=False):
       passed_tests += 1
     if not global_only:
       c_at_1_obj[key] = test_result
-  if not global_only or passed_tests:
+  if not global_only or include_tests:
     c_at_1_obj['passed_tests'] = passed_tests
     c_at_1_obj['total_tests'] = total_tests
   eval_results['c@1'] = c_at_1_obj

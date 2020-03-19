@@ -8,8 +8,7 @@ flags = None
 def parse_flags():
   parser = argparse.ArgumentParser()
   parser.add_argument('--join', '-j', help='Datasets or predictions to join', nargs='*')
-  parser.add_argument('--prefix', '-p', help='Prefixes for each file',
-      required=True, nargs='*')
+  parser.add_argument('--prefix', '-p', help='Prefixes for each file', nargs='*')
   parser.add_argument('--output', '-o', 
       help='Output for compiled dataset, default is stdout')
 
@@ -39,7 +38,9 @@ def join(paths, prefixes):
   for path, prefix in zip(paths, prefixes):
     dataset = json.load(open(path, 'r'))
     dataset, is_dataset = preprocess_dataset(dataset)
-    data.extend(fix_ids(dataset, prefix))
+    if prefix is not None:
+      dataset = fix_ids(dataset, prefix)
+    data.extend(dataset)
   if is_dataset:
     full_dataset = dict(version='1.0', data=data)
   else:
@@ -54,7 +55,9 @@ def join(paths, prefixes):
 if __name__ == '__main__':
   flags = parse_flags()
   prefixes = flags.prefix
-  while len(prefixes) < len(flags.join):
-    prefixes.append(prefixes[-1])    
+  if prefixes is None:
+    prefixes = [None] * len(flags.join)
+  elif len(prefixes) < len(flags.join):
+    prefixes = [prefixes[0]] * len(flags.join)
   join(flags.join, prefixes)
 

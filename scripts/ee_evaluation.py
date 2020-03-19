@@ -40,12 +40,13 @@ def main():
   answers = parse_predictions_file(flags.predictions)
   apply_threshold(answers , flags.threshold)
   answer_labels = gather_labels(answers)
-  eval_results = c_at_1(gold, answer_labels, no_answer, global_only=flags.global_only)
+  eval_results = c_at_1(gold, answer_labels, no_answer,
+      global_only=flags.global_only, include_tests=flags.passed_tests)
   if flags.accuracy:
     apply_threshold(answers, 0.0)
     answer_labels = gather_labels(answers)
     accuracy_results = c_at_1(gold, answer_labels, no_answer,
-        global_only=flags.global_only)
+        global_only=flags.global_only, include_tests=flags.passed_tests)
     eval_results['accuracy'] = accuracy_results['c@1']
   results = json.dumps(sort_dict(eval_results)) + '\n'
   if flags.output is None:
