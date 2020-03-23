@@ -6,7 +6,7 @@ import glob
 import argparse
 
 flags = None
-partitions = ['all', 'high', 'middle']
+partitions = ['high', 'middle', 'all']
 
 """
   train/dev/test := 01, 02, 03
