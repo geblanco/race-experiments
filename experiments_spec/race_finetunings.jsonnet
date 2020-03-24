@@ -14,42 +14,51 @@ local common = {
   per_gpu_train_batch_size: 4,
   per_gpu_eval_batch_size: 32,
   gradient_accumulation_steps: 8,
-};
-
-local bertCommon = {
   model_type: 'bert',
-  model_name_or_path: 'bert-base-uncased',
-  output_dir: 'data/bert-base-uncased',
-  learning_rate: 5e-5,
 };
 
-local multiBertCommon = {
-  model_type: 'bert',
-  model_name_or_path: 'bert-base-multilingual-cased',
-  output_dir: 'data/bert-base-multilingual-cased',
-  learning_rate: 1e-5,
+local models = {
+  bert: {
+    output_dir: 'data/bert-base-uncased',
+    model_name_or_path: 'bert-base-uncased',
+    learning_rate: 5e-5,
+  },
+  multibert: {
+    output_dir: 'data/bert-base-multilingual-cased',
+    model_name_or_path: 'bert-base-multilingual-cased',
+    learning_rate: 1e-5,
+  },
 };
 
-local variables = {
-  globalCommon: utils.fieldsToBash(common),
-  bertCommon: utils.fieldsToBash(bertCommon),
-  multiBertCommon: utils.fieldsToBash(multiBertCommon),
+local modelsTests = [
+  item + '.sh'
+  for item in std.objectFields(models)
+];
+
+local modelName(testName) = utils.trimExt(testName);
+
+local files = {
+  [testName]: |||
+    #!/bin/bash
+    %(common)s
+    %(model)s
+  ||| % {
+    common: utils.fieldsToBash(common),
+    model: utils.fieldsToBash(models[modelName(testName)]),
+  }
+  for testName in modelsTests
 };
 
+local filelist = {
+  'race-finetune.filelist': std.join('\n', modelsTests),
+};
+
+// object comprehension can only have one item, either filelist or model test files in the export section....
+local allFiles = files + filelist;
 
 {
-  'bert.sh': |||
-    #!/bin/bash
-    %(common)s
-    %(vars)s
-  ||| % { common: variables.globalCommon, vars: variables.bertCommon },
-  'multi-bert.sh': |||
-    #!/bin/bash
-    %(common)s
-    %(vars)s
-  ||| % { common: variables.globalCommon, vars: variables.multiBertCommon },
-  'race-finetune.filelist': |||
-    bert.sh
-    multi-bert.sh
-  |||,
+  [fileName]: |||
+    %s
+  ||| % allFiles[fileName]
+  for fileName in std.objectFields(allFiles)
 }

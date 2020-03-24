@@ -25,33 +25,35 @@ local models = {
   },
 };
 
-// this resources do not exist
-local exceptions = {
-  'german-2013': true,
-  'german-2014': false,
-};
-
-local eeCommons = {
+local testsData = {
   languages: ['spanish', 'english', 'french', 'german', 'italian', 'russian'],
-  // languages: ['spanish', 'english'],
   years: [2013, 2014, 2015],
-  mapLanguage(language): [
-    std.format('%s-%s.sh', [language, year])
-    for year in self.years
-    if !(std.objectHas(exceptions, std.format('%s-%s', [language, year])))
-  ],
-  mapModel(model): [std.format('%s-%s', [model, test]) for test in self.tests],
-  tests: std.flattenArrays([
-    self.mapLanguage(language)
-    for language in self.languages
-  ]),
-  modelsTests: std.flattenArrays([self.mapModel(model) for model in std.objectFields(models)]),
+  exceptions: ['german-2013', 'german-2014'],
+  modelNames: std.objectFields(models),
+  datasetPrefix: 'race-test',
 };
 
-// from bert-english-2013.sh to rc-test-english-2013.json
+local modelsTests = [
+  item + '.sh'
+  for item in
+    utils.generateCombinations(
+      testsData.modelNames,
+      testsData.languages,
+      testsData.years,
+      testsData.exceptions,
+      '%s-%s'
+    )
+];
+
+// from bert-english-2013.sh to race-test-english-2013.json
 local composeDataId(testName, modelName) = {
-  DATA_ID: std.strReplace(std.strReplace(testName, modelName, 'rc-test'), '.sh', '.json'),
+  DATA_ID:
+    testsData.datasetPrefix +
+    std.lstripChars(utils.trimExt(testName), modelName)
+    + '.json',
 };
+
+local modelName(testName) = utils.getStringSegment(testName, '-', 0);
 
 local files = {
   [testName]: |||
@@ -61,17 +63,17 @@ local files = {
     %(dataId)s
   ||| % {
     common: utils.fieldsToBash(common),
-    model: utils.fieldsToBash(models[std.split(testName, '-')[0]]),
-    dataId: utils.fieldsToBash(composeDataId(testName, std.split(testName, '-')[0])),
+    model: utils.fieldsToBash(models[modelName(testName)]),
+    dataId: utils.fieldsToBash(composeDataId(testName, modelName(testName))),
   }
-  for testName in eeCommons.modelsTests
+  for testName in modelsTests
 };
 
 local filelist = {
-  'ee-eval.filelist': std.join('\n', eeCommons.modelsTests),
+  'ee-eval.filelist': std.join('\n', modelsTests),
 };
 
-// object comprehension can only have one item, no filelist ....
+// object comprehension can only have one item, either filelist or model test files in the export section....
 local allFiles = files + filelist;
 
 {

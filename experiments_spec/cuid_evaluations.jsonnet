@@ -1,14 +1,14 @@
 local utils = import 'utils.libsonnet';
 
 local common = {
-  task_name: 'race',
-  data_dir: 'data/RACE',
+  task_name: 'ee',
+  data_dir: 'data/CUID',
   fp16: true,
   fp16_opt_level: '"O2"',
   max_seq_length: 384,
   overwrite_cache: true,
-  per_gpu_eval_batch_size: 32,
   do_test: true,
+  per_gpu_eval_batch_size: 32,
   model_type: 'bert',
 };
 
@@ -26,22 +26,34 @@ local models = {
 };
 
 local testsData = {
+  splits: ['A', 'B', 'C'],
+  parts: [1, 2],
+  exceptions: ['C2'],
   modelNames: std.objectFields(models),
-  tests: ['high', 'middle'],
-  datasetPrefix: 'test',
+  datasetPrefix: 'CUID',
 };
 
 local modelsTests = [
   item + '.sh'
-  for item in utils.generateCombinationsTwoSets(testsData.modelNames, testsData.tests, '%s-%s')
+  for item in
+    utils.generateCombinations(
+      testsData.modelNames,
+      testsData.splits,
+      testsData.parts,
+      testsData.exceptions,
+      '%s-%s'
+    )
 ];
 
-local modelName(testName) = utils.getStringSegment(testName, '-', 0);
-local testOnlyName(testName) = utils.getStringSegment(utils.trimExt(testName), '-', 1);
-// from bert-high.sh to test/high
-local composeDataId(testName) = {
-  DATA_ID: testsData.datasetPrefix + '/' + testOnlyName(testName),
+// from bert-english-2013.sh to race-test-english-2013.json
+local composeDataId(testName, modelName) = {
+  DATA_ID:
+    testsData.datasetPrefix +
+    std.lstripChars(utils.trimExt(testName), modelName)
+    + '.json',
 };
+
+local modelName(testName) = utils.getStringSegment(testName, '-', 0);
 
 local files = {
   [testName]: |||
@@ -52,13 +64,13 @@ local files = {
   ||| % {
     common: utils.fieldsToBash(common),
     model: utils.fieldsToBash(models[modelName(testName)]),
-    dataId: utils.fieldsToBash(composeDataId(testName)),
+    dataId: utils.fieldsToBash(composeDataId(testName, modelName(testName))),
   }
   for testName in modelsTests
 };
 
 local filelist = {
-  'race-eval.filelist': std.join('\n', modelsTests),
+  'cuid-eval.filelist': std.join('\n', modelsTests),
 };
 
 // object comprehension can only have one item, either filelist or model test files in the export section....

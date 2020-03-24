@@ -6,6 +6,6 @@ output_folder='../experiments'
 files=$(find . -iname '*.jsonnet' -type f)
 
 for file in ${files[@]}; do
-  echo "-> $file"
+  echo "jsonnet -m $output_folder -y -S $file"
   jsonnet -m $output_folder -y -S $file
 done
