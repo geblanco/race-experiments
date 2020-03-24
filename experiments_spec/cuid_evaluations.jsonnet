@@ -28,7 +28,7 @@ local models = {
 local testsData = {
   splits: ['A', 'B', 'C'],
   parts: [1, 2],
-  exceptions: ['C2'],
+  exceptions: ['C-2'],
   modelNames: std.objectFields(models),
   datasetPrefix: 'CUID',
 };
