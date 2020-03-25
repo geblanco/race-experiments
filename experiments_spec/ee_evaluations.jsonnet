@@ -30,7 +30,7 @@ local testsData = {
   years: [2013, 2014, 2015],
   exceptions: ['german-2013', 'german-2014'],
   modelNames: std.objectFields(models),
-  datasetPrefix: 'race-test',
+  datasetPrefix: 'rc-test',
 };
 
 local modelsTests = [
