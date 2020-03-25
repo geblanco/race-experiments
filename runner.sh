@@ -33,11 +33,18 @@ run_experiment() {
     fi
   done
 
-  python3 ${args[@]}
+  if [[ -z ${DOCKERIZE} ]]; then
+    inside_docker=""
+  else
+    inside_docker="nvidia-docker run ${docker_args[@]}"
+  fi
+  ${inside_docker} python3 ${args[@]}
 }
 
 results_dir='./results'
 [[ ! -d $results_dir ]] && mkdir $results_dir
+
+docker_args="--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -v `pwd`:/workspace"
 
 echo "###### Starting experiments $(date)"
 total_start_time=$(date -u +%s)
