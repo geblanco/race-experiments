@@ -22,6 +22,8 @@ save_experiment_data() {
 run_experiment() {
   local file=$1; shift
   args="./transformers/examples/run_multiple_choice.py "
+  # Run this if just want to dump your args to a config file (use with from config import *)
+  #   args="./scripts/dump_args.py "
   for line in $(sed -n 's/^export \(.*\)=\([^ ]*\)/\1=\2/p' $file | tr -d \'\"); do 
     # <key>=<value>
     key=${line%=*}
@@ -44,7 +46,8 @@ run_experiment() {
 results_dir='./results'
 [[ ! -d $results_dir ]] && mkdir $results_dir
 
-docker_args="--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -v `pwd`:/workspace"
+docker_img="race-experiments"
+docker_args="--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -v `pwd`:/workspace $docker_img"
 
 echo "###### Starting experiments $(date)"
 total_start_time=$(date -u +%s)
