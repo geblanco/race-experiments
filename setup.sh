@@ -22,5 +22,6 @@ wget -q -O data/race.tar.gz http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz
 cd data/
 echo "Uncompressing race..."
 tar xfz race.tar.gz
+rm race.tar.gz
 cd -
 
