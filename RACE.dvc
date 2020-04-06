@@ -1,0 +1,21 @@
+md5: d79ec7ce84fbfed6d24522454cba9a9c
+cmd: ./setup.sh
+deps:
+- md5: 5050b43782b150c55b789b6ce04cf240
+  path: setup.sh
+outs:
+- md5: 060c3b446e8425924493b70bd46083de.dir
+  path: data/RACE
+  cache: true
+  metric: false
+  persist: false
+- md5: 7d31afdcf8149da7b171cd0ff09cb363.dir
+  path: vecmap
+  cache: false
+  metric: false
+  persist: false
+- md5: a918a05bbbeca8dff448ab13f69d32eb.dir
+  path: transformers
+  cache: false
+  metric: false
+  persist: false

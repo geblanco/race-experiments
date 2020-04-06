@@ -134,3 +134,5 @@ experiments/
 eval_logs/
 results/
 data/
+transformers/
+vecmap/
