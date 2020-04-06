@@ -1,14 +1,16 @@
 #!/bin/bash
 
-dockerize=${1:-0}
+# dockerize by default
+dockerize=${1:-1}
 
 if ! hash git unzip wget 2>/dev/null; then
   echo '"git", "unzip" and "wget" are necessary, install them first'
   exit 1
 fi
 
-# download transformers repo, installed in docker 
+# download some repos we want locally, installed in docker
 git clone https://github.com/m0n0l0c0/transformers
+git clone https://github.com/artetxem/vecmap
 if [[ "$dockerize" -eq 0 ]]; then
   ./install_packages.sh $dockerize
 else
