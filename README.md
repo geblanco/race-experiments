@@ -1,5 +1,23 @@
 # race-experiments
-Experiements conducted at UNED with the multiple-choice question answering dataset RACE
+Experiments conducted at UNED with the multiple-choice question answering dataset RACE
+
+## Reproduction
+We are setting DVC for reproducibility, but it is not ready yet. Here is a
+brief outline:
+
+- `prepare.dvc` should download all datasets, not only RACE (e.g.: QA4MRE).
+- `train.dvc` [not created yet] should generate all experiments and run the
+  model training related ones.
+- `search_hyperp.dvc` [not created yet] should search/tune the necessary hyper
+  parameters and store them elsewhere
+- `test.dvc` [not created yet] should test every listed model with the
+  available hyper params.
+
+## Experiments
+Every experiment has a _jsonnet_ specification file in the experiments folder.
+To generate them just issue `./experiments_spec/generate_experiment_files.sh`.
+This are just plain bash files with variables, interpretable by the script that
+runs the experiments.
 
 ## scripts
 Training with [this transformers fork](https://github.com/m0n0l0c0/transformers) will produce `nbest_predictions` files just like training for SQuAD. This predictions can be used to calculate [c@1](https://www.researchgate.net/publication/220873174_A_Simple_Measure_to_Assess_Non-response) or estimate a threshold to give empty answers.
