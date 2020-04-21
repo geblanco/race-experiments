@@ -1,8 +1,10 @@
-md5: d8479a20f6bbf1a20d6d554515175cd9
+md5: d1f1424490e6ec996f059a307a11d7f8
 cmd: ./scripts/compile_race.sh data/RACE data/processed
 deps:
 - md5: 060c3b446e8425924493b70bd46083de.dir
   path: data/RACE
+- md5: de8ad03bb23a690fb78720e668c3f471
+  path: scripts/compile_race.sh
 outs:
 - md5: bb6fdab881f3747caa98862ee8f0e8a0
   path: data/processed/race_test_compiled_high.json
