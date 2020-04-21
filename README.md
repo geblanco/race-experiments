@@ -6,6 +6,7 @@ We are setting DVC for reproducibility, but it is not ready yet. Here is a
 brief outline:
 
 - `prepare.dvc` should download all datasets, not only RACE (e.g.: QA4MRE).
+- `compile_race.dvc` compiles each RACE split to a single file, needed for evaluation.
 - `train.dvc` [not created yet] should generate all experiments and run the
   model training related ones.
 - `search_hyperp.dvc` [not created yet] should search/tune the necessary hyper
