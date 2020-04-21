@@ -4,7 +4,7 @@ local common = {
   task_name: 'race',
   data_dir: 'data/RACE',
   fp16: true,
-  fp16_opt_level: '"O2"',
+  fp16_opt_level: 'O2',
   max_seq_length: 384,
   do_train: true,
   do_eval: true,
@@ -31,21 +31,14 @@ local models = {
 };
 
 local modelsTests = [
-  item + '.sh'
+  item + '.json'
   for item in std.objectFields(models)
 ];
 
 local modelName(testName) = utils.trimExt(testName);
 
 local files = {
-  [testName]: |||
-    #!/bin/bash
-    %(common)s
-    %(model)s
-  ||| % {
-    common: utils.fieldsToBash(common),
-    model: utils.fieldsToBash(models[modelName(testName)]),
-  }
+  [testName]: std.manifestJsonEx(common + models[modelName(testName)], '  ')
   for testName in modelsTests
 };
 
