@@ -1,11 +1,15 @@
 #!/bin/bash
 
+scriptdir=$(dirname -- "$(realpath -- "$0")")
+rootdir=$(dirname $scriptdir)
+cd $rootdir
+
 languages=("english" "spanish" "italian" "french" "russian" "german")
 # languages=("english" "spanish")
 years=(2013 2014 2015)
 models=("bert" "multibert")
 
-eval_script="./scripts/ee_evaluation.py"
+eval_script="./evaluation/ee_evaluation.py"
 join_script="./scripts/utils_ee.py"
 json2table="../../dataset-utils/json2table"
 
@@ -84,3 +88,5 @@ for lang in ${languages[@]}; do
     echo ""
   done
 done
+
+cd -

@@ -1,9 +1,13 @@
 #!/bin/bash
 
+scriptdir=$(dirname -- "$(realpath -- "$0")")
+rootdir=$(dirname $scriptdir)
+cd $rootdir
+
 models=("bert" "multibert")
 splits=("middle" "high")
 
-eval_script="./scripts/ee_evaluation.py"
+eval_script="./evaluation/ee_evaluation.py"
 join_script="./scripts/utils_ee.py"
 json2table="../../dataset-utils/json2table"
 
@@ -65,3 +69,6 @@ for split in ${splits[@]}; do
     echo ""
   done
 done
+
+cd -
+
