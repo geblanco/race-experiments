@@ -1,5 +1,6 @@
-md5: d1f1424490e6ec996f059a307a11d7f8
+md5: 4789c0a3371a9e92f7bc94ed3a5b1368
 cmd: ./scripts/compile_race.sh data/RACE data/processed
+wdir: ..
 deps:
 - md5: 060c3b446e8425924493b70bd46083de.dir
   path: data/RACE
