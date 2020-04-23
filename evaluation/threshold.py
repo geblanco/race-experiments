@@ -1,7 +1,8 @@
 import sys
 import json
 import argparse
-from evaluation import c_at_1_by_test
+
+from metrics import c_at_1_by_test
 from utils import argmax, unique, parse_predictions_file
 
 flags = None
