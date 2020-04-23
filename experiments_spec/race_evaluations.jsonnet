@@ -4,7 +4,7 @@ local common = {
   task_name: 'race',
   data_dir: 'data/RACE',
   fp16: true,
-  fp16_opt_level: '"O2"',
+  fp16_opt_level: 'O2',
   max_seq_length: 384,
   overwrite_cache: true,
   per_gpu_eval_batch_size: 32,
@@ -32,7 +32,7 @@ local testsData = {
 };
 
 local modelsTests = [
-  item + '.sh'
+  item + '.json'
   for item in utils.generateCombinationsTwoSets(testsData.modelNames, testsData.tests, '%s-%s')
 ];
 
@@ -44,16 +44,10 @@ local composeDataId(testName) = {
 };
 
 local files = {
-  [testName]: |||
-    #!/bin/bash
-    %(common)s
-    %(model)s
-    %(dataId)s
-  ||| % {
-    common: utils.fieldsToBash(common),
-    model: utils.fieldsToBash(models[modelName(testName)]),
-    dataId: utils.fieldsToBash(composeDataId(testName)),
-  }
+  [testName]: std.manifestJsonEx(
+    common + models[modelName(testName)] + composeDataId(testName),
+    ' '
+  )
   for testName in modelsTests
 };
 

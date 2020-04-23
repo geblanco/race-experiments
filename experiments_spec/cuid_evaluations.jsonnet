@@ -4,7 +4,7 @@ local common = {
   task_name: 'ee',
   data_dir: 'data/CUID',
   fp16: true,
-  fp16_opt_level: '"O2"',
+  fp16_opt_level: 'O2',
   max_seq_length: 384,
   overwrite_cache: true,
   do_test: true,
@@ -34,7 +34,7 @@ local testsData = {
 };
 
 local modelsTests = [
-  item + '.sh'
+  item + '.json'
   for item in
     utils.generateCombinations(
       testsData.modelNames,
@@ -56,16 +56,10 @@ local composeDataId(testName, modelName) = {
 local modelName(testName) = utils.getStringSegment(testName, '-', 0);
 
 local files = {
-  [testName]: |||
-    #!/bin/bash
-    %(common)s
-    %(model)s
-    %(dataId)s
-  ||| % {
-    common: utils.fieldsToBash(common),
-    model: utils.fieldsToBash(models[modelName(testName)]),
-    dataId: utils.fieldsToBash(composeDataId(testName, modelName(testName))),
-  }
+  [testName]: std.manifestJsonEx(
+    common + models[modelName(testName)] + composeDataId(testName, modelName(testName)),
+    ' '
+  )
   for testName in modelsTests
 };
 

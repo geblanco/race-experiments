@@ -28,12 +28,12 @@ To estimate the threshold parameter of a multilingual BERT model (you have to fi
 python ./scripts/threshold.py results/multi-bert_is_test_false_eval_nbest_predictions.json
 ```
 
-To calculate the c@1 value for RACE test set you have to compile the test split of RACE to a single file understandable by the evaluation script (`./scripts/ee_evaluation.py`):
+To calculate the c@1 value for RACE test set you have to compile the test split of RACE to a single file understandable by the evaluation script (`./evaluation/ee_evaluation.py`):
 ```bash
 # compile the dataset
 compiled_dataset="../datasets/RACE/test/race_test_compiled_high.json"
 predictions="results/multi-bert-high_is_test_true_eval_nbest_predictions.json"
 python scripts/utils_race.py --data ../datasets/RACE/test --partition high > $compiled_dataset
 # evaluate results, aplying previously obtained threshold
-python scripts/ee_evaluation.py $compiled_dataset $predictions -t 0.3784342485810497
+python evaluation/ee_evaluation.py $compiled_dataset $predictions -t 0.3784342485810497
 ```

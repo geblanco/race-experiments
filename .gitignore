@@ -129,10 +129,9 @@ dmypy.json
 .pyre/
 
 # Jsonnet generated experiment files
-experiments/
+/experiments/
 # Results
-eval_logs/
-results/
-data/
-transformers/
-vecmap/
+/eval_logs/
+/results/
+/transformers/
+/vecmap/

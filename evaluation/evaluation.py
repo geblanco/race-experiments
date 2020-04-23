@@ -7,7 +7,8 @@ implement:
 import argparse
 import json
 import sys
-from evaluation import c_at_1
+
+from metrics import c_at_1
 from threshold import apply_threshold
 from utils import parse_predictions_file, gather_labels, sort_dict
 

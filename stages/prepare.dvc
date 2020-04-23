@@ -1,5 +1,6 @@
-md5: d79ec7ce84fbfed6d24522454cba9a9c
+md5: 06ea5801732fbf1b0b5326d862a5c2d6
 cmd: ./setup.sh
+wdir: ..
 deps:
 - md5: 5050b43782b150c55b789b6ce04cf240
   path: setup.sh
@@ -19,3 +20,4 @@ outs:
   cache: false
   metric: false
   persist: false
+
