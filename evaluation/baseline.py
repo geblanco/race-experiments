@@ -17,11 +17,17 @@ def parse_args():
   parser.add_argument('-d', '--dataset', help='Data to apply Baseline',
       required=True)
   parser.add_argument('-o', '--output', help='Output directory to store'
-      'predictions', default='./results/')
+      'predictions', default='./results/nbest_predictions.json')
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit(0)
   return parser.parse_args()
+
+def format_output(output, baseline_name):
+  dir = os.path.dirname(output)
+  name = os.path.basename(output)
+  name = baseline_name + (('-' + name) if name != '' else '')
+  return os.path.join(dir, name)
 
 def set_seed(seed):
   random.seed(seed)
@@ -51,9 +57,9 @@ def main(args):
   examples = processor.get_test_examples(args.dataset)
   for baseline_name in args.baselines:
     scores, preds = apply_baseline_to_examples(examples, baselines[baseline_name]())
-    pred_file = f'{baseline_name}_baseline_is_test_true_eval_nbest_predictions.json'
+    pred_file = format_output(args.output, baseline_name + '_baseline')
     print(f'Baseline `{baseline_name}` obtained score: {scores}, saved predictions to {pred_file}')
-    with open(os.path.join(args.output, pred_file), 'w') as fstream:
+    with open(pred_file, 'w') as fstream:
       fstream.write(json.dumps(preds) + '\n')
 
 if __name__ == '__main__':

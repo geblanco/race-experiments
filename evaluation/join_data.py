@@ -1,3 +1,7 @@
+"""
+Join predictions from various files, prefixing ids with the filename it came from
+"""
+
 import os
 import sys
 import json

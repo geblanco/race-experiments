@@ -7,14 +7,15 @@ cd $rootdir
 models=("bert" "multibert")
 splits=("middle" "high")
 
-eval_script="./evaluation/ee_evaluation.py"
-join_script="./scripts/utils_ee.py"
+eval_script="./evaluation/evaluation.py"
+join_script="./evaluation/join_data.py"
 json2table="../../dataset-utils/json2table"
 
 dataset_dir="../../../datasets/RACE/test/"
 preds_suffix="is_test_true_eval_nbest_predictions.json"
 scores_suffix="is_test_true_eval_scores.json"
 table_suffix="is_test_true_eval_table.txt"
+results_dir="./results"
 
 declare -A thresholds
 
@@ -24,7 +25,7 @@ for model in ${models[@]}; do
   if [[ $# -gt 0 ]]; then
     threshold=$1; shift
   else
-    threshold=$(python scripts/threshold.py --script results/${model}_is_test_false_eval_nbest_predictions.json)
+    threshold=$(python evaluation/threshold.py --script ${results_dir}/${model}_is_test_false_eval_nbest_predictions.json)
   fi
   echo " ${threshold}"
   thresholds[${model}]=$threshold
@@ -49,15 +50,15 @@ evaluate() {
   local model=$1; shift
   local threshold="${thresholds[$model]}"
   local dataset="${dataset_dir}/race_test_compiled_${split}.json"
-  local predictions="results/${model}-${split}_${preds_suffix}"
-  local results="results/${model}-${split}_${scores_suffix}"
-  local table="results/${model}-${split}_${table_suffix}"
+  local predictions="${results_dir}/${model}-${split}_${preds_suffix}"
+  local results="${results_dir}/${model}-${split}_${scores_suffix}"
+  local table="${results_dir}/${model}-${split}_${table_suffix}"
   python $eval_script --global_only --passed_tests --accuracy $dataset $predictions -t $threshold > $results
   $json2table $results -t | tee $table  | awk '{print "   " $0}' | head -n -1 | tail -n 2
 }
 
-join "results/bert" "_${preds_suffix}"
-join "results/multibert" "_${preds_suffix}"
+join "${results_dir}/bert" "_${preds_suffix}"
+join "${results_dir}/multibert" "_${preds_suffix}"
 echo ""
 splits+=("all")
 
@@ -70,5 +71,5 @@ for split in ${splits[@]}; do
   done
 done
 
-cd -
+cd - >/dev/null
 

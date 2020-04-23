@@ -11,7 +11,7 @@ for data_set in 'test' 'dev' 'train'; do
   for partition in 'high' 'middle'; do
     compiled_dataset="${OUTPUT}/race_${data_set}_compiled_${partition}.json"
     echo "-> Compiling ${data_set} - ${partition} to $compiled_dataset"
-    python scripts/utils_race.py --data ${RACE}/${data_set} --partition ${partition} > $compiled_dataset
+    python scripts/compile_race.py --data ${RACE}/${data_set} --partition ${partition} > $compiled_dataset
   done
 done
 
