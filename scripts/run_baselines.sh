@@ -20,16 +20,21 @@ languages=("english" "spanish" "italian" "french" "russian" "german")
 years=(2013 2014 2015)
 # no data for these years
 exceptions=("german-2013" "german-2014")
+outputs=()
 
 # ToDo := grep baseline output files
 run_baselines() {
   local task=$1; shift
   local dataset=$1; shift
   local output=$1; shift
-  python $baseline_script \
+  local result=$(python $baseline_script \
     -t $task \
     -d $dataset \
-    -o $output >/dev/null
+    -o $output \
+  | grep -Po "(?<=saved predictions to )(.*)")
+  for res in ${result[@]}; do
+    outputs+=($res)
+  done
 }
 
 for split in ${splits[@]}; do
@@ -53,5 +58,9 @@ for lang in ${languages[@]}; do
   echo ""
 done
 
+echo ""
+echo "New files: "
+IFS=$'\n' sorted=($(sort <<<"${outputs[*]}")); unset IFS
+printf "%s\n" "${sorted[@]}"
 
 cd - >/dev/null

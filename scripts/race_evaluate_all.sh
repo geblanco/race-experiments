@@ -4,6 +4,7 @@ scriptdir=$(dirname -- "$(realpath -- "$0")")
 rootdir=$(dirname $scriptdir)
 cd $rootdir
 
+baselines=("random_baseline" "longest_baseline")
 models=("bert" "multibert")
 splits=("middle" "high")
 
@@ -57,8 +58,14 @@ evaluate() {
   $json2table $results -t | tee $table  | awk '{print "   " $0}' | head -n -1 | tail -n 2
 }
 
-join "${results_dir}/bert" "_${preds_suffix}"
-join "${results_dir}/multibert" "_${preds_suffix}"
+models=(${models[@]} ${baselines[@]})
+for base in ${baselines[@]}; do
+  thresholds[$base]=0
+done
+
+for model in ${models[@]}; do
+  join "${results_dir}/${model}" "_${preds_suffix}"
+done
 echo ""
 splits+=("all")
 

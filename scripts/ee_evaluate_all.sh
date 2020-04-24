@@ -7,6 +7,7 @@ cd $rootdir
 languages=("english" "spanish" "italian" "french" "russian" "german")
 # languages=("english" "spanish")
 years=(2013 2014 2015)
+baselines=("random_baseline" "longest_baseline")
 models=("bert" "multibert")
 
 eval_script="./evaluation/evaluation.py"
@@ -69,10 +70,17 @@ evaluate() {
   $json2table $results -t | tee $table  | awk '{print "   " $0}' | head -n -1 | tail -n 2
 }
 
+models=(${models[@]} ${baselines[@]})
+for base in ${baselines[@]}; do
+  thresholds[$base]=0
+done
+
 echo "Generating join by year datasets and predictions..."
 join "${ee_dataset_dir}/rc-test" ".json"
-join "${results_dir}/bert" "_${preds_suffix}"
-join "${results_dir}/multibert" "_${preds_suffix}"
+for model in ${models[@]}; do
+  join "${results_dir}/${model}" "_${preds_suffix}"
+done
+
 years+=("all")
 echo ""
 
