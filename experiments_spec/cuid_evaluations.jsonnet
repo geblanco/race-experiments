@@ -47,7 +47,7 @@ local modelsTests = [
 
 // from bert-english-2013.sh to race-test-english-2013.json
 local composeDataId(testName, modelName) = {
-  DATA_ID:
+  data_id:
     testsData.datasetPrefix +
     std.lstripChars(utils.trimExt(testName), modelName)
     + '.json',
