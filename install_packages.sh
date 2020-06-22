@@ -6,13 +6,6 @@ sudo_cmd="sudo"
 if [[ "$inside_docker" -eq 1 ]]; then
   sudo_cmd=""
 fi
-# download transformers repo
-# cloned in setup to always have it in host workspace
-# git clone https://github.com/m0n0l0c0/transformers
-cd transformers
-${sudo_cmd} pip3 install .
-cd -
-
 # install apex manually (py3 error...)
 git clone https://www.github.com/nvidia/apex
 cd apex

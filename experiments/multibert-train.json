@@ -1,0 +1,45 @@
+{
+  "inputs": [
+    "${DATA_DIR}/RACE",
+    "${MODELS_DIR}/bert-base-multilingual-cased"
+  ],
+  "scripts": [
+    "${CODE_DIR}/processing/train.sh"
+  ],
+  "metrics": [
+    "eval_metrics.json"
+  ],
+  "outputs": [
+    "config.json",
+    "pytorch_model.bin",
+    "special_tokens_map.json",
+    "tokenizer_config.json",
+    "training_args.bin",
+    "vocab.txt"
+  ],
+  "results": [
+    "eval_predictions.json"
+  ],
+  "params": {
+    "meta": "multibert-train",
+    "data_dir": "${DATA_DIR}/RACE",
+    "model_name_or_path": "${MODELS_DIR}/bert-base-multilingual-cased",
+    "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
+    "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
+    "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
+    "model_type": "bert",
+    "task_name": "race",
+    "do_eval": true,
+    "do_train": true,
+    "fp16": true,
+    "fp16_opt_level": "O2",
+    "loss_scale": 128,
+    "max_seq_length": 484,
+    "num_train_epochs": 3,
+    "per_gpu_eval_batch_size": 4,
+    "per_gpu_train_batch_size": 8,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 5.0e-05,
+    "warmup_proportion": 0.1
+  }
+}

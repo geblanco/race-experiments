@@ -127,11 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# Jsonnet generated experiment files
-/experiments/
-# Results
-/eval_logs/
-/results/
-/transformers/
-/vecmap/

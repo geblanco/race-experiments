@@ -1,0 +1,36 @@
+{
+  "inputs": [
+    "${DATA_DIR}/RACE",
+    "${MODELS_DIR}/${EXPERIMENT_DIR}"
+  ],
+  "scripts": [
+    "${CODE_DIR}/processing/test.sh"
+  ],
+  "metrics": [
+    "test_metrics.json"
+  ],
+  "results": [
+    "test_predictions.json"
+  ],
+  "params": {
+    "meta": "bert-test",
+    "data_dir": "${DATA_DIR}/RACE",
+    "model_name_or_path": "${MODELS_DIR}/${EXPERIMENT_DIR}",
+    "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
+    "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
+    "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
+    "model_type": "bert",
+    "task_name": "race",
+    "do_test": true,
+    "fp16": true,
+    "fp16_opt_level": "O2",
+    "loss_scale": 128,
+    "max_seq_length": 484,
+    "num_train_epochs": 3,
+    "per_gpu_eval_batch_size": 4,
+    "per_gpu_train_batch_size": 8,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 5.0e-05,
+    "warmup_proportion": 0.1
+  }
+}

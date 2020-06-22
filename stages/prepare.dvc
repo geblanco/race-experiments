@@ -1,8 +1,8 @@
-md5: 06ea5801732fbf1b0b5326d862a5c2d6
-cmd: ./setup.sh
+md5: 773f10c9ba22510afe3d46aadce1709d
+cmd: ./setup.sh 1
 wdir: ..
 deps:
-- md5: 5050b43782b150c55b789b6ce04cf240
+- md5: 46f4163b28c8d0cf8015a3d6c9e196ad
   path: setup.sh
 outs:
 - md5: 060c3b446e8425924493b70bd46083de.dir
@@ -10,14 +10,3 @@ outs:
   cache: true
   metric: false
   persist: false
-- md5: 7d31afdcf8149da7b171cd0ff09cb363.dir
-  path: vecmap
-  cache: false
-  metric: false
-  persist: false
-- md5: a918a05bbbeca8dff448ab13f69d32eb.dir
-  path: transformers
-  cache: false
-  metric: false
-  persist: false
-

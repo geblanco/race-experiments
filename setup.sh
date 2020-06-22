@@ -9,8 +9,6 @@ if ! hash git unzip wget 2>/dev/null; then
 fi
 
 # download some repos we want locally, installed in docker
-git clone https://github.com/m0n0l0c0/transformers
-git clone https://github.com/artetxem/vecmap
 if [[ "$dockerize" -eq 0 ]]; then
   ./install_packages.sh $dockerize
 else

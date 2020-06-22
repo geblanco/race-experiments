@@ -1,0 +1,69 @@
+version = "rosetta_v0.0.1"
+
+[core]
+# group by keys allow paths to be composed from keys as segments
+# for example, when using model_type and task_name as groups, 
+# data dir will contain experiments grouped like <model_type>/<task_name>/experiment1, experiment2
+# [UNUSED]
+group_by_keys = false
+# whether to hash the path o write it in plain text
+# e.g.:
+#   groups = ["model_type", "task_name"]
+#   hashable_keys = ["batch_size", "seq_len"]
+#
+#  experiment path (hash_path = false, keys_as_segments = false):
+#   data/models/<model_type>/<task_name>/batch_size_32_seq_len_384/<experiment model data>
+#   data/results/<model_type>/<task_name>/batch_size_32_seq_len_384/<experiment results data>
+#
+#  experiment path (hash_path = false, keys_as_segments = true):
+#   data/models/<model_type>/<task_name>/batch_size_32/seq_len_384/<experiment model data>
+#   data/results/<model_type>/<task_name>/batch_size_32/seq_len_384/<experiment results data>
+#
+#  experiment path (hash_path = true, keys_as_segments = N/A): [hash({ model_type="...", task_name="...", batch_size=32, seq_len=384 })]
+#   data/models/<model_type>/<task_name>/hash/<experiment model data>
+#   data/results/<model_type>/<task_name>/hash/<experiment results data>
+#
+hash_path = true
+keys_as_segments = false
+overwrite = false
+
+# hooks?
+[visualization]
+# mount the FS to look human just after the experiment
+auto = true
+
+[dirs]
+base_dir = ""
+experiments = "experiments"
+code = "src"
+data = "data"
+specs = "data/specs"
+# inputs
+models = "data/models"
+params = "data/params"
+# outputs
+# outputs = "data/outputs"
+metrics = "data/metrics"
+results = "data/results"
+
+[keydefs]
+  groups = ["model_type"]
+
+  # big definition of hashable parameters,
+  # the example value determines the type
+  hash = [
+    "do_eval",
+    "do_train",
+    "learning_rate",
+    "max_seq_length",
+    "model_type",
+    "task_name",
+    "fp16",
+    "fp16_opt_level",
+    "gradient_accumulation_steps",
+    "num_train_epochs",
+    "per_gpu_eval_batch_size",
+    "per_gpu_train_batch_size",
+    "warmup_proportion",
+    "loss_scale"
+  ]

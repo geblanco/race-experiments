@@ -4,7 +4,6 @@ MAINTAINER Guillermo Echegoyen <gblanco@lsi.uned.es>
 WORKDIR /workspace
 COPY install_packages.sh /workspace
 COPY requirements.txt  /workspace
-COPY transformers  /workspace/transformers
 
 RUN cd /workspace && ./install_packages.sh
 

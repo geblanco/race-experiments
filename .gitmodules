@@ -1,0 +1,4 @@
+[submodule "src/mc-transformers"]
+	path = src/mc-transformers
+	url = https://github.com/geblanco/mc-transformers
+	branch = master
