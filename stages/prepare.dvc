@@ -1,12 +1,6 @@
-md5: 773f10c9ba22510afe3d46aadce1709d
+md5: 02e64e523d01eced972a47344fc7e121
 cmd: ./setup.sh 1
 wdir: ..
 deps:
-- md5: 46f4163b28c8d0cf8015a3d6c9e196ad
+- md5: 0f4231b33571ab940555ae9c4faf39cd
   path: setup.sh
-outs:
-- md5: 060c3b446e8425924493b70bd46083de.dir
-  path: data/RACE
-  cache: true
-  metric: false
-  persist: false

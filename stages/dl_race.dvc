@@ -1,0 +1,12 @@
+md5: 9402743cdb6a2cc75992b43552ececd2
+cmd: ./src/etl/dl_race.sh
+wdir: ..
+deps:
+- md5: 66aa5212d0687e98ca1c0b6e6ee8d5ec
+  path: src/etl/dl_race.sh
+outs:
+- md5: 060c3b446e8425924493b70bd46083de.dir
+  path: data/RACE
+  cache: true
+  metric: false
+  persist: false

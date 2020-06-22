@@ -1,18 +1,21 @@
 #!/usr/bin/env python
-import sys
+
 import json
 import argparse
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('file', help='File to extract arguments from',
+    parser.add_argument(
+        'file', help='File to extract arguments from',
         type=str
     )
-    parser.add_argument('-e', '--extract', help='Fields to extract',
+    parser.add_argument(
+        '-e', '--extract', help='Fields to extract',
         required=False, type=str, default=None
     )
-    parser.add_argument('-x', '--exclude', help='Fields to exclude',
+    parser.add_argument(
+        '-x', '--exclude', help='Fields to exclude',
         required=False, type=str, default=None
     )
     return parser.parse_args()

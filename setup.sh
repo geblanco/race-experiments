@@ -12,14 +12,9 @@ fi
 if [[ "$dockerize" -eq 0 ]]; then
   ./install_packages.sh $dockerize
 else
-  docker build -t race-experiments .
+  docker build -t race-experiments-v2 .
 fi
 
-mkdir -p data
-wget -q -O data/race.tar.gz http://www.cs.cmu.edu/~glai1/data/race/RACE.tar.gz
-cd data/
-echo "Uncompressing race..."
-tar xfz race.tar.gz
-rm race.tar.gz
-cd -
+[[ ! -d data ]] && mkdir -p data
 
+exit 0
