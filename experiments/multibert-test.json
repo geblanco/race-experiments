@@ -4,7 +4,7 @@
     "${MODELS_DIR}/${EXPERIMENT_DIR}/bert-base-multilingual-cased"
   ],
   "scripts": [
-    "${CODE_DIR}/processing/test.sh"
+    "${CODE_DIR}/processing/run.sh"
   ],
   "metrics": [
     "test_metrics.json"
