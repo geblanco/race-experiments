@@ -18,7 +18,7 @@ run_experiment(){
   else
     inside_docker="nvidia-docker run --rm ${docker_args[@]}"
   fi
-  echo "${inside_docker} python3 ${script_file} $(python3 $json_as_args $file)"
+  ${inside_docker} python3 ${script_file} $(python3 $json_as_args $file)
 }
 
 get_experiments(){
