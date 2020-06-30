@@ -11,3 +11,16 @@ dl_race:
   outs:
   - path: data/RACE
     md5: 060c3b446e8425924493b70bd46083de.dir
+dl_models:
+  cmd: python ./src/etl/dl_models.py -m bert-large-uncased bert-base-uncased bert-base-multilingual-cased
+    --overwrite
+  deps:
+  - path: src/etl/dl_models.py
+    md5: 0d5ef3d8ac37319c3a0cc2cb01e46008
+  outs:
+  - path: data/models/bert-base-multilingual-cased
+    md5: a1f6d525ba2fce09b33494660fb40b30.dir
+  - path: data/models/bert-base-uncased
+    md5: 920e464276d35a627e320286038fe655.dir
+  - path: data/models/bert-large-uncased
+    md5: 0f67e0332e28d77ae2cfad4072be01f9.dir

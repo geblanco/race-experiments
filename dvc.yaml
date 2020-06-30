@@ -10,3 +10,12 @@ stages:
     - src/etl/dl_race.sh
     outs:
     - data/RACE
+  dl_models:
+    cmd: python ./src/etl/dl_models.py -m bert-large-uncased bert-base-uncased bert-base-multilingual-cased
+      --overwrite
+    deps:
+    - src/etl/dl_models.py
+    outs:
+    - data/models/bert-base-multilingual-cased
+    - data/models/bert-base-uncased
+    - data/models/bert-large-uncased
