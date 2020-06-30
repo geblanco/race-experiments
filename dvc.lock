@@ -1,0 +1,13 @@
+setup_env:
+  cmd: ./setup.sh 1
+  deps:
+  - path: ./setup.sh
+    md5: 0f4231b33571ab940555ae9c4faf39cd
+dl_race:
+  cmd: ./src/etl/dl_race.sh
+  deps:
+  - path: src/etl/dl_race.sh
+    md5: 66aa5212d0687e98ca1c0b6e6ee8d5ec
+  outs:
+  - path: data/RACE
+    md5: 060c3b446e8425924493b70bd46083de.dir

@@ -1,0 +1,12 @@
+stages:
+  setup_env:
+    cmd: ./setup.sh 1
+    deps:
+    - ./setup.sh
+    always_changed: true
+  dl_race:
+    cmd: ./src/etl/dl_race.sh
+    deps:
+    - src/etl/dl_race.sh
+    outs:
+    - data/RACE
