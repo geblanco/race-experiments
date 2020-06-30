@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorflow:20.02-tf2-py3
+FROM nvcr.io/nvidia/tensorflow:20.03-tf2-py3
 MAINTAINER Guillermo Echegoyen <gblanco@lsi.uned.es>
 
 WORKDIR /workspace

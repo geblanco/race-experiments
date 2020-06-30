@@ -12,7 +12,7 @@ fi
 if [[ "$dockerize" -eq 0 ]]; then
   ./install_packages.sh $dockerize
 else
-  docker build -t race-experiments-v2 .
+  nvidia-docker build -t race-experiments-v2 .
 fi
 
 [[ ! -d data ]] && mkdir -p data
