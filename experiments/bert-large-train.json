@@ -1,7 +1,7 @@
 {
   "inputs": [
     "${DATA_DIR}/RACE",
-    "${MODELS_DIR}/bert-base-uncased"
+    "${MODELS_DIR}/bert-large-uncased"
   ],
   "scripts": [
     "${CODE_DIR}/processing/run.sh"
@@ -21,9 +21,9 @@
     "train_predictions.json"
   ],
   "params": {
-    "meta": "bert-train",
+    "meta": "bert-large-train",
     "data_dir": "${DATA_DIR}/RACE",
-    "model_name_or_path": "${MODELS_DIR}/bert-base-uncased",
+    "model_name_or_path": "${MODELS_DIR}/bert-large-uncased",
     "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
     "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
     "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",

@@ -7,7 +7,7 @@
     "${CODE_DIR}/processing/run.sh"
   ],
   "metrics": [
-    "eval_metrics.json"
+    "train_metrics.json"
   ],
   "outputs": [
     "config.json",
@@ -18,7 +18,7 @@
     "vocab.txt"
   ],
   "results": [
-    "eval_predictions.json"
+    "train_predictions.json"
   ],
   "params": {
     "meta": "multibert-train",
@@ -32,8 +32,9 @@
     "do_eval": true,
     "do_train": true,
     "fp16": true,
-    "fp16_opt_level": "O2",
+    "fp16_opt_level": "O1",
     "loss_scale": 128,
+    "save_steps": 5000,
     "max_seq_length": 484,
     "num_train_epochs": 3,
     "per_gpu_eval_batch_size": 4,

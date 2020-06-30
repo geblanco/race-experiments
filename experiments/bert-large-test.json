@@ -1,36 +1,27 @@
 {
   "inputs": [
     "${DATA_DIR}/RACE",
-    "${MODELS_DIR}/bert-base-uncased"
+    "${MODELS_DIR}/${EXPERIMENT_DIR}"
   ],
   "scripts": [
     "${CODE_DIR}/processing/run.sh"
   ],
   "metrics": [
-    "train_metrics.json"
-  ],
-  "outputs": [
-    "config.json",
-    "pytorch_model.bin",
-    "special_tokens_map.json",
-    "tokenizer_config.json",
-    "training_args.bin",
-    "vocab.txt"
+    "test_metrics.json"
   ],
   "results": [
-    "train_predictions.json"
+    "test_predictions.json"
   ],
   "params": {
-    "meta": "bert-train",
+    "meta": "bert-large-test",
     "data_dir": "${DATA_DIR}/RACE",
-    "model_name_or_path": "${MODELS_DIR}/bert-base-uncased",
+    "model_name_or_path": "${MODELS_DIR}/${EXPERIMENT_DIR}",
     "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
     "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
     "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
     "model_type": "bert",
     "task_name": "race",
-    "do_eval": true,
-    "do_train": true,
+    "do_test": true,
     "fp16": true,
     "fp16_opt_level": "O1",
     "loss_scale": 128,
