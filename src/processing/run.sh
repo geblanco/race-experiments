@@ -50,7 +50,7 @@ ch_to_project_root(){
 
 ch_to_project_root
 docker_img="race-experiments-v2"
-docker_args="--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -v `pwd`:/workspace $docker_img"
+docker_args="--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -v `pwd`:/workspace -v /data:/data $docker_img"
 json_as_args="./src/processing/json_to_program_args.py -e params -x meta"
 
 echo "###### Starting experiments $(date)"

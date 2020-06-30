@@ -1,6 +1,0 @@
-md5: 02e64e523d01eced972a47344fc7e121
-cmd: ./setup.sh 1
-wdir: ..
-deps:
-- md5: 0f4231b33571ab940555ae9c4faf39cd
-  path: setup.sh
