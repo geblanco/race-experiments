@@ -12,6 +12,10 @@
   "results": [
     "test_predictions.json"
   ],
+  "command": [
+    "./src/processing/run.sh",
+    "${SPECS_DIR}/${EXPERIMENT_DIR}_experiment.json"
+  ],
   "params": {
     "meta": "bert-test",
     "data_dir": "${DATA_DIR}/RACE",

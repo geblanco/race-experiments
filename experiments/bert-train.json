@@ -20,6 +20,10 @@
   "results": [
     "train_predictions.json"
   ],
+  "command": [
+    "./src/processing/run.sh",
+    "${SPECS_DIR}/${EXPERIMENT_DIR}_experiment.json"
+  ],
   "params": {
     "meta": "bert-train",
     "data_dir": "${DATA_DIR}/RACE",
