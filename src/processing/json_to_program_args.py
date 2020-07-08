@@ -7,15 +7,15 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'file', help='File to extract arguments from',
-        type=str
+        '-f', '--file', type=str,
+        help='File to extract arguments from',
     )
     parser.add_argument(
         '-e', '--extract', help='Fields to extract',
         required=False, type=str, default=None
     )
     parser.add_argument(
-        '-x', '--exclude', help='Fields to exclude',
+        '-x', '--exclude', help='Fields to exclude', nargs='*',
         required=False, type=str, default=None
     )
     return parser.parse_args()
@@ -37,7 +37,8 @@ def main(args):
     if args.extract is not None:
         json_args = json_args[args.extract]
     if args.exclude is not None:
-        del json_args[args.exclude]
+        for exclude in args.exclude:
+            del json_args[exclude]
     array_args = json_args_to_array_args(json_args)
     print(' '.join(array_args))
 

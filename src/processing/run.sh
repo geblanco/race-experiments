@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DONT_DOCKERIZE=1
+
 fix_experiment_path(){
   local exp=$1
   if [[ " $(basename $1) " =~ " ${exp} " ]]; then
@@ -12,13 +14,13 @@ fix_experiment_path(){
 
 run_experiment(){
   local file=$1; shift
-  local script_file="./src/mc-transformers/run_multiple_choice.py"
+  local script_file="./src/mc-transformers/run_mc_trainer.py"
   if [[ ! -z ${DONT_DOCKERIZE} ]]; then
     inside_docker=""
   else
     inside_docker="nvidia-docker run --rm ${docker_args[@]}"
   fi
-  ${inside_docker} python3 ${script_file} $(python3 $json_as_args $file)
+  ${inside_docker} python3 ${script_file} $(python3 $json_as_args -f $file)
 }
 
 get_experiments(){
@@ -51,7 +53,7 @@ ch_to_project_root(){
 ch_to_project_root
 docker_img="race-experiments-v2"
 docker_args="--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -v `pwd`:/workspace -v /data:/data $docker_img"
-json_as_args="./src/processing/json_to_program_args.py -e params -x meta"
+json_as_args="./src/processing/json_to_program_args.py -e params -x meta model_type"
 
 echo "###### Starting experiments $(date)"
 total_start_time=$(date -u +%s)
