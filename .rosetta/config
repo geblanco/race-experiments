@@ -52,9 +52,9 @@ results = "data/results"
   # big definition of hashable parameters,
   # the example value determines the type
   hash = [
-    "do_test",
-    "do_eval",
     "do_train",
+    "do_eval",
+    "do_predict",
     "meta",
     "learning_rate",
     "max_seq_length",
