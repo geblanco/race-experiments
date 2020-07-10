@@ -1,7 +1,7 @@
 {
   "inputs": [
     "${DATA_DIR}/RACE",
-    "${MODELS_DIR}/${EXPERIMENT_DIR}"
+    "${MODELS_DIR}/$find_experiment(bert-train.json)"
   ],
   "scripts": [
     "${CODE_DIR}/processing/run.sh"
@@ -10,7 +10,8 @@
     "test_metrics.json"
   ],
   "results": [
-    "test_predictions.json"
+    "test_predictions.json",
+    "test_nbest_predictions.json"
   ],
   "command": [
     "./src/processing/run.sh",
@@ -19,23 +20,17 @@
   "params": {
     "meta": "bert-test",
     "data_dir": "${DATA_DIR}/RACE",
+    "cache_dir": "/tmp",
     "model_name_or_path": "${MODELS_DIR}/${EXPERIMENT_DIR}",
     "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
     "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
     "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
     "model_type": "bert",
     "task_name": "race",
-    "do_test": true,
+    "do_predict": true,
     "fp16": true,
     "fp16_opt_level": "O1",
-    "loss_scale": 128,
-    "save_steps": 5000,
     "max_seq_length": 484,
-    "num_train_epochs": 3,
-    "per_gpu_eval_batch_size": 4,
-    "per_gpu_train_batch_size": 8,
-    "gradient_accumulation_steps": 4,
-    "learning_rate": 5.0e-05,
-    "warmup_proportion": 0.1
+    "per_gpu_eval_batch_size": 4
   }
 }
