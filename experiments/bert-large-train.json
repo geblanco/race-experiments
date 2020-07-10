@@ -7,18 +7,19 @@
     "${CODE_DIR}/processing/run.sh"
   ],
   "metrics": [
-    "train_metrics.json"
+    "eval_metrics.json"
   ],
   "outputs": [
-    "config.json",
-    "pytorch_model.bin",
-    "special_tokens_map.json",
-    "tokenizer_config.json",
-    "training_args.bin",
-    "vocab.txt"
+    "${MODELS_DIR}/${EXPERIMENT_DIR}/config.json",
+    "${MODELS_DIR}/${EXPERIMENT_DIR}/pytorch_model.bin",
+    "${MODELS_DIR}/${EXPERIMENT_DIR}/special_tokens_map.json",
+    "${MODELS_DIR}/${EXPERIMENT_DIR}/tokenizer_config.json",
+    "${MODELS_DIR}/${EXPERIMENT_DIR}/training_args.bin",
+    "${MODELS_DIR}/${EXPERIMENT_DIR}/vocab.txt"
   ],
   "results": [
-    "train_predictions.json"
+    "eval_predictions.json",
+    "eval_nbest_predictions.json"
   ],
   "command": [
     "./src/processing/run.sh",
@@ -27,24 +28,24 @@
   "params": {
     "meta": "bert-large-train",
     "data_dir": "${DATA_DIR}/RACE",
+    "cache_dir": "/tmp",
     "model_name_or_path": "${MODELS_DIR}/bert-large-uncased",
     "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
-    "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
-    "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
+    "metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
+    "results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
     "model_type": "bert",
     "task_name": "race",
-    "do_eval": true,
     "do_train": true,
+    "do_eval": true,
     "fp16": true,
     "fp16_opt_level": "O1",
-    "loss_scale": 128,
-    "save_steps": 5000,
+    "save_total_limit": 0,
     "max_seq_length": 484,
-    "num_train_epochs": 3,
-    "per_gpu_eval_batch_size": 4,
-    "per_gpu_train_batch_size": 8,
-    "gradient_accumulation_steps": 4,
+    "num_train_epochs": 2,
+    "per_device_eval_batch_size": 8,
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 8,
     "learning_rate": 5.0e-05,
-    "warmup_proportion": 0.1
+    "warmup_steps": 500
   }
 }

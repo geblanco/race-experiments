@@ -2,7 +2,7 @@ setup_env:
   cmd: ./setup.sh 1
   deps:
   - path: ./setup.sh
-    md5: 0f4231b33571ab940555ae9c4faf39cd
+    md5: d522eca3dfea71cbedc8f7c7cd86e5d3
 dl_race:
   cmd: ./src/etl/dl_race.sh
   deps:
