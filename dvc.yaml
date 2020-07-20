@@ -19,47 +19,6 @@ stages:
     - data/models/bert-base-multilingual-cased
     - data/models/bert-base-uncased
     - data/models/bert-large-uncased
-  12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2:
-    cmd: ./src/processing/run.sh data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json
-    deps:
-    - data/RACE
-    - data/models/bert-base-multilingual-cased
-    - src/processing/run.sh
-    params:
-    - data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json:
-      - params.cache_dir
-      - params.data_dir
-      - params.do_eval
-      - params.do_train
-      - params.fp16
-      - params.fp16_opt_level
-      - params.gradient_accumulation_steps
-      - params.learning_rate
-      - params.max_seq_length
-      - params.meta
-      - params.metrics_dir
-      - params.model_name_or_path
-      - params.model_type
-      - params.num_train_epochs
-      - params.output_dir
-      - params.per_device_eval_batch_size
-      - params.per_device_train_batch_size
-      - params.results_dir
-      - params.save_total_limit
-      - params.task_name
-      - params.warmup_steps
-    outs:
-    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/config.json
-    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/pytorch_model.bin
-    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/special_tokens_map.json
-    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/tokenizer_config.json
-    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/training_args.bin
-    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/vocab.txt
-    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2.log
-    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_nbest_predictions.json
-    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_predictions.json
-    metrics:
-    - data/metrics/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_metrics.json
   eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561:
     cmd: ./src/processing/run.sh data/specs/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561_experiment.json
     deps:
@@ -68,8 +27,6 @@ stages:
     - src/processing/run.sh
     params:
     - data/specs/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561_experiment.json:
-      - params.cache_dir
-      - params.data_dir
       - params.do_eval
       - params.do_train
       - params.fp16
@@ -78,17 +35,9 @@ stages:
       - params.learning_rate
       - params.max_seq_length
       - params.meta
-      - params.metrics_dir
-      - params.model_name_or_path
       - params.model_type
       - params.num_train_epochs
-      - params.output_dir
-      - params.per_device_eval_batch_size
-      - params.per_device_train_batch_size
-      - params.results_dir
-      - params.save_total_limit
       - params.task_name
-      - params.warmup_steps
     outs:
     - data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/config.json
     - data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/pytorch_model.bin
@@ -101,16 +50,14 @@ stages:
     - data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_predictions.json
     metrics:
     - data/metrics/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_metrics.json
-  200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda:
-    cmd: ./src/processing/run.sh data/specs/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda_experiment.json
+  12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2:
+    cmd: ./src/processing/run.sh data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json
     deps:
     - data/RACE
-    - data/models/bert-large-uncased
+    - data/models/bert-base-multilingual-cased
     - src/processing/run.sh
     params:
-    - data/specs/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda_experiment.json:
-      - params.cache_dir
-      - params.data_dir
+    - data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json:
       - params.do_eval
       - params.do_train
       - params.fp16
@@ -119,26 +66,18 @@ stages:
       - params.learning_rate
       - params.max_seq_length
       - params.meta
-      - params.metrics_dir
-      - params.model_name_or_path
       - params.model_type
       - params.num_train_epochs
-      - params.output_dir
-      - params.per_device_eval_batch_size
-      - params.per_device_train_batch_size
-      - params.results_dir
-      - params.save_total_limit
       - params.task_name
-      - params.warmup_steps
     outs:
-    - data/models/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/config.json
-    - data/models/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/pytorch_model.bin
-    - data/models/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/special_tokens_map.json
-    - data/models/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/tokenizer_config.json
-    - data/models/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/training_args.bin
-    - data/models/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/vocab.txt
-    - data/results/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda.log
-    - data/results/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/eval_nbest_predictions.json
-    - data/results/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/eval_predictions.json
+    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/config.json
+    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/pytorch_model.bin
+    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/special_tokens_map.json
+    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/tokenizer_config.json
+    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/training_args.bin
+    - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/vocab.txt
+    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2.log
+    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_nbest_predictions.json
+    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_predictions.json
     metrics:
-    - data/metrics/200768fa6e95c7347513e9250083b680bb09d426e39084cb3bfb9e34962e1dda/eval_metrics.json
+    - data/metrics/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_metrics.json
