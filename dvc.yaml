@@ -45,7 +45,6 @@ stages:
     - data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/tokenizer_config.json
     - data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/training_args.bin
     - data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/vocab.txt
-    - data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561.log
     - data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_nbest_predictions.json
     - data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_predictions.json
     metrics:
@@ -76,7 +75,6 @@ stages:
     - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/tokenizer_config.json
     - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/training_args.bin
     - data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/vocab.txt
-    - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2.log
     - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_nbest_predictions.json
     - data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_predictions.json
     metrics:
