@@ -24,3 +24,89 @@ dl_models:
     md5: 920e464276d35a627e320286038fe655.dir
   - path: data/models/bert-large-uncased
     md5: 0f67e0332e28d77ae2cfad4072be01f9.dir
+eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561:
+  cmd: ./src/processing/run.sh data/specs/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561_experiment.json
+  deps:
+  - path: data/RACE
+    md5: f79eb092cbb99c259f279d03ed1776f2.dir
+  - path: data/models/bert-base-uncased
+    md5: 920e464276d35a627e320286038fe655.dir
+  - path: src/processing/run.sh
+    md5: d39a4c623dd4792f1a1bb9275a200c9c
+  params:
+    data/specs/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561_experiment.json:
+      params.do_eval: true
+      params.do_train: true
+      params.fp16: true
+      params.fp16_opt_level: O1
+      params.gradient_accumulation_steps: 8
+      params.learning_rate: '5e-05'
+      params.max_seq_length: 484
+      params.meta: bert-train
+      params.model_type: bert
+      params.num_train_epochs: 2
+      params.task_name: race
+  outs:
+  - path: data/metrics/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_metrics.json
+    md5: 205523b58fcb966cad8680a2c4ef3b60
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/config.json
+    md5: 56e07662d4cb143aeb5ce3c5c9c2a992
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/pytorch_model.bin
+    md5: c7e69d940a1fdeaa945f3f422e488acf
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/special_tokens_map.json
+    md5: 8b3fb1023167bb4ab9d70708eb05f6ec
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/tokenizer_config.json
+    md5: acaa1589c694bf6f6c146b3bac976f67
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/training_args.bin
+    md5: 8fbd6014fcb26b1b8d7782f2f507f52e
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/vocab.txt
+    md5: 64800d5d8528ce344256daf115d4965e
+  - path: data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561.log
+    md5: d41d8cd98f00b204e9800998ecf8427e
+  - path: data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_nbest_predictions.json
+    md5: ba5260bcd0951db0b7930220dc232e0d
+  - path: data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_predictions.json
+    md5: c7c22407d9756a898127859a9748d9db
+12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2:
+  cmd: ./src/processing/run.sh data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json
+  deps:
+  - path: data/RACE
+    md5: f79eb092cbb99c259f279d03ed1776f2.dir
+  - path: data/models/bert-base-multilingual-cased
+    md5: a1f6d525ba2fce09b33494660fb40b30.dir
+  - path: src/processing/run.sh
+    md5: d39a4c623dd4792f1a1bb9275a200c9c
+  params:
+    data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json:
+      params.do_eval: true
+      params.do_train: true
+      params.fp16: true
+      params.fp16_opt_level: O1
+      params.gradient_accumulation_steps: 8
+      params.learning_rate: '5e-05'
+      params.max_seq_length: 484
+      params.meta: multibert-train
+      params.model_type: bert
+      params.num_train_epochs: 2
+      params.task_name: race
+  outs:
+  - path: data/metrics/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_metrics.json
+    md5: ba02060a5cc5fa5b4f411f2b41c7a4da
+  - path: data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/config.json
+    md5: 89c48de2bb697b4c47814587f6009c8b
+  - path: data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/pytorch_model.bin
+    md5: 1ee965d8448b9aec5458f0a8610be6d9
+  - path: data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/special_tokens_map.json
+    md5: 8b3fb1023167bb4ab9d70708eb05f6ec
+  - path: data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/tokenizer_config.json
+    md5: bd2095a6f1895712b38f5c742a06e4cb
+  - path: data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/training_args.bin
+    md5: c760678505cb0fd542e535d0ad1bea8b
+  - path: data/models/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/vocab.txt
+    md5: d9d865138d17f1958502ed060ecfeeb6
+  - path: data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2.log
+    md5: d41d8cd98f00b204e9800998ecf8427e
+  - path: data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_nbest_predictions.json
+    md5: a9129a1d3162e5b4c0d6f37ad494b401
+  - path: data/results/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2/eval_predictions.json
+    md5: f8df0328ee92cb6aa0af0fa6785a4eed
