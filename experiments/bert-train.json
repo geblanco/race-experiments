@@ -40,6 +40,7 @@
     "fp16": true,
     "fp16_opt_level": "O1",
     "save_total_limit": 0,
+    "save_steps": 0,
     "max_seq_length": 484,
     "num_train_epochs": 2,
     "per_device_eval_batch_size": 8,
