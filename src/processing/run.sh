@@ -14,13 +14,13 @@ fix_experiment_path(){
 
 run_experiment(){
   local file=$1; shift
-  local script_file="./src/mc-transformers/run_mc_trainer.py"
+  local script_file="mc_transformers"
   if [[ ! -z ${DONT_DOCKERIZE} ]]; then
     inside_docker=""
   else
     inside_docker="nvidia-docker run --rm ${docker_args[@]}"
   fi
-  ${inside_docker} python3 ${script_file} $(python3 $json_as_args -f $file)
+  ${inside_docker} ${script_file} $(python3 $json_as_args -f $file)
 }
 
 get_experiments(){
