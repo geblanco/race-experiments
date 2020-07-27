@@ -69,7 +69,7 @@ eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561:
   cmd: ./src/processing/run.sh data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json
   deps:
   - path: data/RACE
-    md5: 538601577a550736fd55a53c8d54fd5f.dir
+    md5: 28bfd06eb6c6561032bf6c07678be564.dir
   - path: data/models/bert-base-multilingual-cased
     md5: a1f6d525ba2fce09b33494660fb40b30.dir
   - path: src/processing/run.sh
