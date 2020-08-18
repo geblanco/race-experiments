@@ -95,3 +95,24 @@ stages:
     - data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_nbest_predictions.json
     metrics:
     - data/metrics/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/evaluation.json
+  b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468:
+    cmd: ./src/processing/run.sh data/specs/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468_experiment.json
+    deps:
+    - data/RACE
+    - data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561
+    - src/processing/run.sh
+    params:
+    - data/specs/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468_experiment.json:
+      - params.do_predict
+      - params.fp16
+      - params.fp16_opt_level
+      - params.max_seq_length
+      - params.meta
+      - params.model_type
+      - params.per_gpu_eval_batch_size
+      - params.task_name
+    outs:
+    - data/results/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_nbest_predictions.json
+    - data/results/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_predictions.json
+    metrics:
+    - data/metrics/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_metrics.json
