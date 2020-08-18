@@ -28,7 +28,7 @@ eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561:
   cmd: ./src/processing/run.sh data/specs/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561_experiment.json
   deps:
   - path: data/RACE
-    md5: 28bfd06eb6c6561032bf6c07678be564.dir
+    md5: d860a27fb560a6a86c5b3bee83410d57.dir
   - path: data/models/bert-base-uncased
     md5: 920e464276d35a627e320286038fe655.dir
   - path: src/processing/run.sh
@@ -62,9 +62,9 @@ eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561:
   - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/vocab.txt
     md5: 64800d5d8528ce344256daf115d4965e
   - path: data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_nbest_predictions.json
-    md5: 0e059dae01759b8f0933144010975832
+    md5: 5ba52af5077eb33683de874745a1b52b
   - path: data/results/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/eval_predictions.json
-    md5: 0b133be3216ab27f4197e06ec9bec22a
+    md5: c7c22407d9756a898127859a9748d9db
 12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2:
   cmd: ./src/processing/run.sh data/specs/12942b9ce5eb231bd51d867a17ff9b243de813ae44de6056b5066ac67a7131b2_experiment.json
   deps:
@@ -128,3 +128,29 @@ eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561_evaluation:
   outs:
   - path: data/metrics/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561/evaluation.json
     md5: 1366c999e5a8756f165c5caf658c4282
+b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468:
+  cmd: ./src/processing/run.sh data/specs/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468_experiment.json
+  deps:
+  - path: data/RACE
+    md5: 85fc3cbb7d8210b323f73d5ee607eeac.dir
+  - path: data/models/eee4b9c4ecad29f96b656c5c85af637ab919d0ac561a95d0914203925d8f4561
+    md5: dca4d454a27a7f4b2448fb6729306933.dir
+  - path: src/processing/run.sh
+    md5: 445bd14aad7e94080cb81cf92c00e2bb
+  params:
+    data/specs/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468_experiment.json:
+      params.do_predict: true
+      params.fp16: true
+      params.fp16_opt_level: O1
+      params.max_seq_length: 484
+      params.meta: bert-test
+      params.model_type: bert
+      params.per_gpu_eval_batch_size: 8
+      params.task_name: race
+  outs:
+  - path: data/metrics/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_metrics.json
+    md5: 18432b95426ac25a00d7475aa326b790
+  - path: data/results/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_nbest_predictions.json
+    md5: 7ce266b19ef50db9b6151662437f090a
+  - path: data/results/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_predictions.json
+    md5: 7631dd61dcafb3c8d3952168daa47b88

@@ -21,16 +21,16 @@
     "meta": "bert-test",
     "data_dir": "${DATA_DIR}/RACE",
     "cache_dir": "/tmp",
-    "model_name_or_path": "${MODELS_DIR}/${EXPERIMENT_DIR}",
+    "model_name_or_path": "${MODELS_DIR}/$find_experiment(bert-train.json)",
     "output_dir": "${MODELS_DIR}/${EXPERIMENT_DIR}",
-    "output_metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
-    "output_results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
+    "metrics_dir": "${METRICS_DIR}/${EXPERIMENT_DIR}",
+    "results_dir": "${RESULTS_DIR}/${EXPERIMENT_DIR}",
     "model_type": "bert",
     "task_name": "race",
     "do_predict": true,
     "fp16": true,
     "fp16_opt_level": "O1",
     "max_seq_length": 484,
-    "per_gpu_eval_batch_size": 4
+    "per_gpu_eval_batch_size": 8
   }
 }
