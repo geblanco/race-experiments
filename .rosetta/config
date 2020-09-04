@@ -5,7 +5,7 @@ version = "rosetta_v0.0.1"
 # for example, when using model_type and task_name as groups, 
 # data dir will contain experiments grouped like <model_type>/<task_name>/experiment1, experiment2
 # [UNUSED]
-group_by_keys = false
+group_by_keys = true
 # whether to hash the path o write it in plain text
 # e.g.:
 #   groups = ["model_type", "task_name"]
@@ -23,7 +23,7 @@ group_by_keys = false
 #   data/models/<model_type>/<task_name>/hash/<experiment model data>
 #   data/results/<model_type>/<task_name>/hash/<experiment results data>
 #
-hash_path = true
+hash_path = false
 keys_as_segments = false
 overwrite = false
 
@@ -47,7 +47,7 @@ metrics = "data/metrics"
 results = "data/results"
 
 [keydefs]
-  groups = ["model_type"]
+  groups = ["model_type", "task_name", "meta"]
 
   # big definition of hashable parameters,
   # the example value determines the type

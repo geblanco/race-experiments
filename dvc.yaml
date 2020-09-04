@@ -116,3 +116,84 @@ stages:
     - data/results/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_predictions.json
     metrics:
     - data/metrics/b23a5448ffda331818de28fa4c5f0f8a07683d639842af0341040d35f32bf468/test_metrics.json
+  ? bert_race_multibert-train_do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2
+  : cmd: ./src/processing/run.sh data/specs/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2_experiment.json
+    deps:
+    - data/RACE
+    - data/models/bert-base-multilingual-cased
+    - src/processing/run.sh
+    params:
+    - ? data/specs/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2_experiment.json
+      : - params.do_eval
+        - params.do_train
+        - params.fp16
+        - params.fp16_opt_level
+        - params.gradient_accumulation_steps
+        - params.learning_rate
+        - params.max_seq_length
+        - params.meta
+        - params.model_type
+        - params.num_train_epochs
+        - params.task_name
+    outs:
+    - data/models/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/config.json
+    - data/models/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/pytorch_model.bin
+    - data/models/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/special_tokens_map.json
+    - data/models/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/tokenizer_config.json
+    - data/models/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/training_args.bin
+    - data/models/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/vocab.txt
+    - data/results/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/eval_nbest_predictions.json
+    - data/results/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/eval_predictions.json
+    metrics:
+    - data/metrics/bert/race/multibert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/eval_metrics.json
+  ? bert_race_bert-train_do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2
+  : cmd: ./src/processing/run.sh data/specs/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2_experiment.json
+    deps:
+    - data/RACE
+    - data/models/bert-base-uncased
+    - src/processing/run.sh
+    params:
+    - ? data/specs/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2_experiment.json
+      : - params.do_eval
+        - params.do_train
+        - params.fp16
+        - params.fp16_opt_level
+        - params.gradient_accumulation_steps
+        - params.learning_rate
+        - params.max_seq_length
+        - params.meta
+        - params.model_type
+        - params.num_train_epochs
+        - params.task_name
+    outs:
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/config.json
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/pytorch_model.bin
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/special_tokens_map.json
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/tokenizer_config.json
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/training_args.bin
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/vocab.txt
+    - data/results/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/eval_nbest_predictions.json
+    - data/results/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/eval_predictions.json
+    metrics:
+    - data/metrics/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2/eval_metrics.json
+  bert_race_bert-test_do_predict_max_seq_length_484_fp16_fp16_opt_level_O1_per_gpu_eval_batch_size_8:
+    cmd: ./src/processing/run.sh data/specs/bert/race/bert-test/do_predict_max_seq_length_484_fp16_fp16_opt_level_O1_per_gpu_eval_batch_size_8_experiment.json
+    deps:
+    - data/RACE
+    - data/models/bert/race/bert-train/do_train_do_eval_learning_rate_5e_05_max_seq_length_484_fp16_fp16_opt_level_O1_gradient_accumulation_steps_8_num_train_epochs_2
+    - src/processing/run.sh
+    params:
+    - ? data/specs/bert/race/bert-test/do_predict_max_seq_length_484_fp16_fp16_opt_level_O1_per_gpu_eval_batch_size_8_experiment.json
+      : - params.do_predict
+        - params.fp16
+        - params.fp16_opt_level
+        - params.max_seq_length
+        - params.meta
+        - params.model_type
+        - params.per_gpu_eval_batch_size
+        - params.task_name
+    outs:
+    - data/results/bert/race/bert-test/do_predict_max_seq_length_484_fp16_fp16_opt_level_O1_per_gpu_eval_batch_size_8/test_nbest_predictions.json
+    - data/results/bert/race/bert-test/do_predict_max_seq_length_484_fp16_fp16_opt_level_O1_per_gpu_eval_batch_size_8/test_predictions.json
+    metrics:
+    - data/metrics/bert/race/bert-test/do_predict_max_seq_length_484_fp16_fp16_opt_level_O1_per_gpu_eval_batch_size_8/test_metrics.json
